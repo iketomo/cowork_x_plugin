@@ -1,4 +1,5 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "x-manager-marketplace",
   "owner": {
     "name": "iketomo"
@@ -6,12 +7,13 @@
   "plugins": [
     {
       "name": "x-manager",
-      "source": ".",
+      "source": "./x-manager",
       "description": "X (Twitter) 投稿の作成・投稿・パフォーマンス分析・トレンド分析を一括管理するプラグイン。X運用を支援する4つのスキルと4つのサブエージェントを提供。",
       "version": "1.0.0",
       "author": {
         "name": "iketomo"
-      }
+      },
+      "category": "productivity"
     }
   ]
 }

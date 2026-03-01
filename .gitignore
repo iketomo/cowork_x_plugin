@@ -1,5 +1,5 @@
 # ローカル設定（機密情報を含む）
-config.local.md
+**/config.local.md
 
 # 環境変数
 .env
@@ -14,11 +14,11 @@ credentials.json
 service-account.json
 
 # レポート出力（ローカル生成物）
-log/*.md
-log/*.log
+**/log/*.md
+**/log/*.log
 
 # 画像生成出力
-scripts/output/
+**/scripts/output/
 
 # Python
 __pycache__/

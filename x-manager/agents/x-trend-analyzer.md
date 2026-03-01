@@ -49,7 +49,7 @@ ON CONFLICT (date) DO UPDATE SET
 ```
 
 ## ファイル保存
-保存先: /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_x_plugin/log/x-trend-report_YYYY-MM-DD.md
+保存先: /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_x_plugin/x-manager/log/x-trend-report_YYYY-MM-DD.md
 （logフォルダがなければ作成）
 
 レポートフォーマット:

@@ -6,32 +6,39 @@ X（Twitter）投稿の作成・投稿・パフォーマンス分析・トレン
 ## プラグイン構成
 
 ```
-cowork_x_plugin/
+cowork_x_plugin/                          # マーケットプレイス（カタログ）
 ├── .claude-plugin/
-│   └── plugin.json              # プラグインマニフェスト
-├── skills/                       # スキル定義（4つ）
-│   ├── x-daily-report/SKILL.md  # 日次パフォーマンスレポート
-│   ├── x-trend-report/SKILL.md  # トレンド分析レポート
-│   ├── x-post/SKILL.md          # X投稿実行
-│   └── x-writing/SKILL.md       # 投稿文作成
-├── agents/                       # サブエージェント定義（4つ）
-│   ├── x-daily-analyzer.md      # 日次分析サブエージェント
-│   ├── x-trend-data-collector.md # トレンドデータ収集
-│   ├── x-trend-news-researcher.md # ニュース背景調査
-│   └── x-trend-analyzer.md      # トレンド総合分析
-├── commands/                      # スラッシュコマンド（5つ）
-│   ├── x-daily.md               # /x-daily — 日次レポート生成
-│   ├── x-trend.md               # /x-trend — トレンド分析
-│   ├── x-post.md                # /x-post — X投稿実行
-│   ├── x-write.md               # /x-write — 投稿文作成
-│   └── x-image.md               # /x-image — 画像生成
-├── scripts/
-│   └── generate_image.py        # X投稿用画像生成（Gemini）
-├── reference/
-│   └── x-trend-tracker-design.md # トレンドトラッカー設計書
-├── log/                          # レポート出力先
-├── CLAUDE.md                     # このファイル
-└── PROGRESS.md                   # 作業過程
+│   └── marketplace.json                  # マーケットプレイスマニフェスト
+├── x-manager/                            # プラグイン本体
+│   ├── .claude-plugin/
+│   │   └── plugin.json                   # プラグインマニフェスト
+│   ├── skills/                           # スキル定義（4つ）
+│   │   ├── x-daily-report/SKILL.md
+│   │   ├── x-trend-report/SKILL.md
+│   │   ├── x-post/SKILL.md
+│   │   └── x-writing/SKILL.md
+│   ├── agents/                           # サブエージェント定義（4つ）
+│   │   ├── x-daily-analyzer.md
+│   │   ├── x-trend-data-collector.md
+│   │   ├── x-trend-news-researcher.md
+│   │   └── x-trend-analyzer.md
+│   ├── commands/                         # スラッシュコマンド（5つ）
+│   │   ├── x-daily.md
+│   │   ├── x-trend.md
+│   │   ├── x-post.md
+│   │   ├── x-write.md
+│   │   └── x-image.md
+│   ├── scripts/
+│   │   └── generate_image.py
+│   ├── reference/
+│   │   └── x-trend-tracker-design.md
+│   ├── log/                              # レポート出力先
+│   ├── config.local.md                   # ローカル設定（gitignore）
+│   └── config.example.md                 # 設定テンプレート
+├── CLAUDE.md                             # このファイル
+├── SETUP.md                              # セットアップガイド
+├── PROGRESS.md                           # 作業過程
+└── .gitignore
 ```
 
 ## スキル一覧

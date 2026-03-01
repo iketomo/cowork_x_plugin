@@ -80,7 +80,7 @@ ON CONFLICT (date) DO UPDATE SET
 
 ## 手順5: Markdownレポート出力
 以下のフォーマットでレポートをMarkdownファイルに保存：
-- 保存先: /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_x_plugin/log/x-daily-report_YYYY-MM-DD.md
+- 保存先: /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_x_plugin/x-manager/log/x-daily-report_YYYY-MM-DD.md
 - logフォルダがなければ作成
 
 レポートフォーマット：
