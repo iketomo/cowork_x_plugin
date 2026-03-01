@@ -10,7 +10,7 @@ weekly-youtube-ideasスキルを使って、今週のトレンドから企画案
 ## 実行手順
 
 1. `config.local.md` からSupabaseプロジェクトIDを取得
-2. Taskツール（サブエージェント）でSupabase MCP の `execute_sql` を使い、トレンドデータを取得・分析
+2. サブエージェント（youtube-trend-analyzer）でトレンドデータ取得・分析を実行
 3. サブエージェントの分析結果をもとに、メインエージェントで企画案10本を生成
 4. レポートを `config.local.md` の出力先フォルダに保存
 5. 完了後、レポートファイルのパスをユーザーに報告
