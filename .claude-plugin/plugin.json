@@ -1,0 +1,9 @@
+{
+  "name": "x-manager",
+  "description": "X (Twitter) 投稿の作成・投稿・パフォーマンス分析・トレンド分析を一括管理するプラグイン。いけともch（AI・生成AI系 3.3万フォロワー）のX運用を支援する4つのスキルと4つのサブエージェントを提供。日次レポート生成、トレンド分析、投稿文作成、X投稿までをカバー。",
+  "version": "1.0.0",
+  "author": {
+    "name": "iketomo",
+    "email": "iketomo@workstyle-evolution.com"
+  }
+}
