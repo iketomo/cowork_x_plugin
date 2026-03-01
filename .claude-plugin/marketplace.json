@@ -6,10 +6,7 @@
   "plugins": [
     {
       "name": "x-manager",
-      "source": {
-        "source": "github",
-        "repo": "iketomo/cowork_x_plugin"
-      },
+      "source": ".",
       "description": "X (Twitter) 投稿の作成・投稿・パフォーマンス分析・トレンド分析を一括管理するプラグイン。X運用を支援する4つのスキルと4つのサブエージェントを提供。",
       "version": "1.0.0",
       "author": {
