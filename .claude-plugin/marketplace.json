@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "x-manager-marketplace",
+  "name": "cowork-plugins-marketplace",
   "owner": {
     "name": "iketomo"
   },
@@ -9,6 +9,36 @@
       "name": "x-manager",
       "source": "./x-manager",
       "description": "X (Twitter) 投稿の作成・投稿・パフォーマンス分析・トレンド分析を一括管理するプラグイン。X運用を支援する4つのスキルと4つのサブエージェントを提供。",
+      "version": "1.0.0",
+      "author": {
+        "name": "iketomo"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "circle-manager",
+      "source": "./circle-manager",
+      "description": "Circleコミュニティ「アイザック」の日次レポート生成プラグイン。未対応コメント・新規投稿・メンバー動向・盛り上げアクション提案を含むレポートを生成。",
+      "version": "1.0.0",
+      "author": {
+        "name": "iketomo"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "luma-manager",
+      "source": "./luma-manager",
+      "description": "Lumaイベントの登録データを分析し、実績サマリ・傾向分析・打ち手提案を含む日次レポートを生成してSlack DMで報告するプラグイン。",
+      "version": "1.0.0",
+      "author": {
+        "name": "iketomo"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "youtube-ideas-manager",
+      "source": "./youtube-ideas-manager",
+      "description": "いけともch向けYouTube企画案を週次で生成するプラグイン。Supabaseのトレンド動画データを分析し、企画案10本を自動生成。",
       "version": "1.0.0",
       "author": {
         "name": "iketomo"
