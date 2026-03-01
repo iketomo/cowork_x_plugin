@@ -13,7 +13,7 @@ version: 1.0.0
 Supabaseのx_*テーブルからデータを取得し、投稿パフォーマンスを分析してレポートを生成する。
 
 ## 前提
-- Supabaseプロジェクト: `iltymrnkqchixvtpvewm`
+- Supabaseプロジェクト: `config.local.md` の Supabase 設定を参照
 - MCP: `execute_sql` を使用してデータ取得
 
 ## コンテキスト節約アーキテクチャ

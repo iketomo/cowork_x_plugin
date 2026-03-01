@@ -28,9 +28,9 @@ tools: ["Write", "Read"]
    - Watch（6-10位）: 注目ポイント1行
 2. カテゴリ別トレンド: 各カテゴリの傾向1-2行
 3. フォーマット分析: テキストから識別（速報系/解説系/体験系/意見系/キュレーション系）
-4. いけともch向け投稿戦略: 方針3点 + 投稿案3案（タイトル/フック/推奨時間帯/参考Winner）
+4. 自アカウント向け投稿戦略（※アカウント情報は `config.local.md` 参照）: 方針3点 + 投稿案3案（タイトル/フック/推奨時間帯/参考Winner）
 
-## DB保存（execute_sql で実行、プロジェクトID: iltymrnkqchixvtpvewm）
+## DB保存（execute_sql で実行、プロジェクトID は `config.local.md` を参照）
 
 ```sql
 INSERT INTO x_trend_daily_report (id, date, total_collected, total_after_filter,
@@ -79,7 +79,7 @@ ON CONFLICT (date) DO UPDATE SET
 ## フォーマット傾向
 [2-3行]
 
-## いけともch投稿方針
+## 投稿方針
 1. ...
 2. ...
 3. ...

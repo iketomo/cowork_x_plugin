@@ -1,0 +1,37 @@
+# ローカル設定（機密情報を含む）
+config.local.md
+
+# 環境変数
+.env
+.env.local
+.env.*.local
+
+# 認証・秘密鍵
+*.pem
+*.key
+*.cert
+credentials.json
+service-account.json
+
+# レポート出力（ローカル生成物）
+log/*.md
+log/*.log
+
+# 画像生成出力
+scripts/output/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Claude Code ローカル設定
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db

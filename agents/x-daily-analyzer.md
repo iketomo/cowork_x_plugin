@@ -56,7 +56,7 @@ WebSearchツールで以下を検索（計3回、各結果は上位3件のみ確
 - 推奨時間: HH:MM
 
 ## 手順4: DB保存
-Supabase execute_sql（project_id: iltymrnkqchixvtpvewm）で以下を実行：
+Supabase execute_sql（project_id は `config.local.md` を参照）で以下を実行：
 
 ```sql
 INSERT INTO x_tweet_analysis (date, total_tracked, winners, watch_list, summary, suggestions, run_log)

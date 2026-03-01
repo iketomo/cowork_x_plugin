@@ -20,7 +20,7 @@ tools: ["Read", "Grep"]
 
 # Xトレンドデータ収集エージェント
 
-Supabaseプロジェクト iltymrnkqchixvtpvewm に対して execute_sql でSQLを実行し、結果を整形して返す。
+Supabaseプロジェクト（`config.local.md` のプロジェクトIDを参照）に対して execute_sql でSQLを実行し、結果を整形して返す。
 
 ## 返却フォーマット（厳守・これ以外の情報は返さない）
 

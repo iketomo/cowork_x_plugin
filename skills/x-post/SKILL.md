@@ -20,7 +20,7 @@ Supabase Edge Function `x-post-tweet` を、pg_net経由で呼び出してツイ
 ## 前提条件
 - Supabase Edge Function `x-post-tweet` がデプロイ済み
 - X API OAuth 1.0aキー（X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET）がSupabase Secretsに設定済み
-- Supabaseプロジェクト: `cowork`（ID: `iltymrnkqchixvtpvewm`）
+- Supabaseプロジェクト: `config.local.md` の Supabase 設定を参照
 - pg_net拡張が有効化済み（v0.20.0）
 
 ## 投稿フロー
@@ -55,17 +55,18 @@ Supabase Edge Function `x-post-tweet` を、pg_net経由で呼び出してツイ
 Supabase MCPの `execute_sql` ツールで以下のSQLを実行する：
 
 ```sql
+-- ※ {EDGE_FUNCTION_URL} と {ANON_KEY} は config.local.md から取得すること
 SELECT net.http_post(
-  url := 'https://iltymrnkqchixvtpvewm.supabase.co/functions/v1/x-post-tweet',
+  url := '{EDGE_FUNCTION_URL}/x-post-tweet',
   headers := '{
     "Content-Type": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsdHltcm5rcWNoaXh2dHB2ZXdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5ODQ4NDAsImV4cCI6MjA4NzU2MDg0MH0.3jhu_WcThF2PS2f5ha05D3ZPiG_9M_eW7E7zfm9tL1A"
+    "Authorization": "Bearer {ANON_KEY}"
   }'::jsonb,
   body := '{"text": "ここに投稿テキスト"}'::jsonb
 );
 ```
 
-- `project_id` は `iltymrnkqchixvtpvewm`
+- `project_id` は `config.local.md` の Supabase プロジェクトID を参照
 - 戻り値はリクエストID（整数）
 
 #### レスポンスの確認
@@ -113,7 +114,7 @@ WHERE id = {リクエストID};
 ## Edge Function仕様
 
 ### エンドポイント
-`POST https://iltymrnkqchixvtpvewm.supabase.co/functions/v1/x-post-tweet`
+`POST {EDGE_FUNCTION_URL}/x-post-tweet`（※ config.local.md 参照）
 
 ### リクエスト
 ```json
@@ -127,7 +128,7 @@ WHERE id = {リクエストID};
 {
   "success": true,
   "tweet_id": "1234567890",
-  "url": "https://x.com/iketomo2/status/1234567890",
+  "url": "https://x.com/{X_USERNAME}/status/1234567890",
   "text": "投稿テキスト",
   "char_count": 7
 }

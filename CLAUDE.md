@@ -41,7 +41,7 @@ cowork_x_plugin/
 | x-daily-report | 「X日次レポート」「パフォーマンス分析」 | 自分の投稿のWinner/Watch分類・伸び分析・投稿提案 |
 | x-trend-report | 「Xトレンドレポート」「AI界隈のバズ」 | AI領域バズ投稿のトレンド分析・投稿戦略提案 |
 | x-post | 「Xに投稿して」「ツイートして」 | Edge Function経由でXに投稿 |
-| x-writing | 「X投稿を書いて」「ツイート案」 | 3.3万フォロワー向けの投稿文作成 |
+| x-writing | 「X投稿を書いて」「ツイート案」 | 投稿文作成（プロフィールは config.local.md 参照） |
 
 ## サブエージェント一覧
 
@@ -63,7 +63,7 @@ cowork_x_plugin/
 | `/x-image` | 投稿用画像を生成 | 投稿テキスト or ファイルパス（任意） |
 
 ## Supabase設定
-- プロジェクト: `cowork`（ID: `iltymrnkqchixvtpvewm`）
+- プロジェクトID・認証情報: `config.local.md` を参照
 - MCP: `execute_sql` を使用
 
 ## データベース構成
