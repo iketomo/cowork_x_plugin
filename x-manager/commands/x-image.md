@@ -1,5 +1,5 @@
 ---
-description: X投稿用の画像をGemini 3 Proで生成する
+description: X投稿用の画像をGemini 3.1 Flash Imageで生成する
 argument-hint: [投稿テキスト or テキストファイルパス]
 allowed-tools: ["Bash", "Read", "Write"]
 ---
@@ -27,5 +27,5 @@ python /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_x_plugin/x-manager/script
 ## 画像スタイル（固定）
 - 日本のビジネス書風「ゆるいイラスト」
 - 水彩風の淡い色、手描き風の線
-- 1:1（正方形）、2K解像度
+- 1:1（正方形）
 - テキストは日本語

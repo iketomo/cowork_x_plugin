@@ -12,7 +12,7 @@ cowork_plugin/                              # マーケットプレイス
 ├── x-manager/                             # プラグイン① X (Twitter) 管理
 │   ├── .claude-plugin/plugin.json
 │   ├── skills/                            # 4スキル
-│   ├── agents/                            # 4サブエージェント
+│   ├── agents/                            # 5サブエージェント
 │   ├── commands/                          # 5コマンド
 │   ├── scripts/
 │   ├── reference/
@@ -69,6 +69,7 @@ cowork_plugin/                              # マーケットプレイス
 | x-trend-data-collector | sonnet | x-trend-report Step1 | SQL実行・データ整形 |
 | x-trend-news-researcher | sonnet | x-trend-report Step2 | バズ投稿の背景調査（並列5件） |
 | x-trend-analyzer | sonnet | x-trend-report Step3 | 総合分析・DB保存・レポート出力 |
+| x-writer | sonnet | x-writing (x-write) | SKILL.md要件に基づく投稿文作成・品質チェック |
 
 #### コマンド
 

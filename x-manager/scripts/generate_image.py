@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 X投稿用画像生成スクリプト
-Gemini Nano Banana Pro (gemini-3-pro-image-preview) を使用して、
+Gemini (gemini-3.1-flash-image-preview) を使用して、
 X投稿の内容に合わせた1:1のイラスト画像を生成する。
 
 使い方:
@@ -105,7 +105,7 @@ Generate the illustration now.
 
 
 def generate_image(post_text: str, output_path: str | None = None) -> str:
-    """Gemini Nano Banana Pro で画像を生成する"""
+    """Gemini 3.1 Flash Image で画像を生成する"""
 
     # APIキー取得
     api_key = os.environ.get("GEMINI_API_KEY")
@@ -128,19 +128,18 @@ def generate_image(post_text: str, output_path: str | None = None) -> str:
     # プロンプト構築
     prompt = extract_key_message(post_text)
 
-    print("🎨 Nano Banana Pro で画像を生成中...")
-    print(f"   モデル: gemini-3-pro-image-preview")
+    print("🎨 Gemini 3.1 Flash Image で画像を生成中...")
+    print(f"   モデル: gemini-3.1-flash-image-preview")
     print(f"   サイズ: 1:1")
 
     try:
         response = client.models.generate_content(
-            model="gemini-3-pro-image-preview",
+            model="gemini-3.1-flash-image-preview",
             contents=prompt,
             config=types.GenerateContentConfig(
                 response_modalities=["IMAGE", "TEXT"],
                 image_config=types.ImageConfig(
                     aspect_ratio="1:1",
-                    image_size="2K",
                 ),
             ),
         )
@@ -169,7 +168,7 @@ def generate_image(post_text: str, output_path: str | None = None) -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="X投稿用画像生成（Gemini Nano Banana Pro）"
+        description="X投稿用画像生成（Gemini 3.1 Flash Image）"
     )
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("post_text", nargs="?", help="X投稿の文章テキスト")

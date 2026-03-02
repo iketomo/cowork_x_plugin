@@ -1,0 +1,51 @@
+{
+  "date": "2026-03-02",
+  "total_tracked": 19,
+  "winners": [
+    {
+      "tweet_id": "2027609711139287499",
+      "score_3d": 48,
+      "text": "GoogleのAI音楽生成ツール"
+    },
+    {
+      "tweet_id": "2027217133948776837",
+      "score_3d": 36,
+      "text": "NotebookLM MCP"
+    },
+    {
+      "tweet_id": "2027564412500906126",
+      "score_3d": 36,
+      "text": "Google Workspace Gemini"
+    },
+    {
+      "tweet_id": "2027670107053244680",
+      "score_3d": 23,
+      "text": "GMOエージェント施策"
+    },
+    {
+      "tweet_id": "2026981444799909986",
+      "score_3d": 9,
+      "text": "Claude Agent Teams"
+    }
+  ],
+  "watch_list": [
+    {
+      "tweet_id": "2027166068146589956",
+      "score_3d": 9
+    },
+    {
+      "tweet_id": "2026563872464023866",
+      "score_3d": 5
+    },
+    {
+      "tweet_id": "2026562531616260540",
+      "score_3d": 5
+    }
+  ],
+  "summary": "全体傾向：上昇。AI新機能リリース速報がエンゲージメント獲得。共通テーマ：具体的なビジネスユースケース。",
+  "suggestions": "AIエージェント進化対応、朝時間帯での速報配置、具体的ユースケース記載。",
+  "run_log": {
+    "generated_at": "2026-03-02T00:00:00Z",
+    "method": "subagent"
+  }
+}
