@@ -44,6 +44,16 @@
         "name": "iketomo"
       },
       "category": "productivity"
+    },
+    {
+      "name": "cowork-manager",
+      "source": "./cowork-manager",
+      "description": "Coworkプラグインの作成・カスタマイズ・管理を支援するプラグイン。3つのスキル（作成・カスタマイズ・一覧）がそれぞれ専用のサブエージェントに委譲する軽量アーキテクチャ。",
+      "version": "1.0.0",
+      "author": {
+        "name": "iketomo"
+      },
+      "category": "productivity"
     }
   ]
 }

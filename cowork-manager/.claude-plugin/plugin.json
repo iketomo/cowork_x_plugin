@@ -1,0 +1,9 @@
+{
+  "name": "cowork-manager",
+  "version": "1.0.0",
+  "description": "Coworkプラグインの作成・カスタマイズ・管理を支援するプラグイン",
+  "author": {
+    "name": "tomohiro"
+  },
+  "keywords": ["plugin", "cowork", "management", "scaffold"]
+}

@@ -57,3 +57,31 @@
 - `commands/x-write.md` — `/x-write` X投稿文作成
 - `commands/x-post.md` — `/x-post` X投稿実行
 - `commands/x-image.md` — `/x-image` 投稿用画像生成
+
+---
+
+## 2026-03-03: プラグイン作成ガイドのドキュメント化
+
+### 実施内容
+- 既存の全プラグイン（x-manager, circle-manager, luma-manager, youtube-ideas-manager）の構成パターンを調査
+- スキル定義書（plugin-creator）の仕様を反映した包括的なプラグイン作成ガイドを作成
+- `.claude/` ディレクトリにドキュメントと参照指示を配置
+
+### 作成したファイル
+
+**ドキュメント:**
+- `.claude/plugin-creation-guide.md` — プラグイン作成・管理の包括的ガイド
+  - 基本概念（Plugin vs Marketplace）
+  - フォルダ構成ルール
+  - JSON マニフェスト仕様（marketplace.json / plugin.json）
+  - SKILL.md / Agent / Command の作成テンプレート
+  - 機密情報管理（config.example.md / config.local.md パターン）
+  - コンテキスト節約アーキテクチャ
+  - バージョン管理ルール
+  - 8フェーズの作成手順
+  - エラー対処一覧
+
+- `.claude/CLAUDE.md` — プラグイン作成時の参照指示
+  - plugin-creation-guide.md への参照を義務化
+  - 作業フローの定義
+  - 重要ルールのサマリ
