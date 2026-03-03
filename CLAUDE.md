@@ -165,4 +165,11 @@ cowork_plugin/                              # マーケットプレイス
 #### データベース
 - Supabase: `youtube_idea_generator`（config.local.md参照）
 - DB: `weekly_trending_summary`, `weekly_trending_compact`, `news`, `ideas`
-- レポート出力先: `cowork_youtube_ideas_optimize/log/`
+- レポート出先: `cowork_youtube_ideas_optimize/log/`
+
+## バージョン運用ルール
+
+- `CLAUDE.md` をアップデートした場合は、以下のバージョンを同一の値に揃えて更新する
+  - `.claude-plugin/marketplace.json` の各 `plugins[].version`
+  - 各プラグイン直下の `.claude-plugin/plugin.json` の `version`
+- バージョンは `1.0.1` のように段階的にアップデートし、常に全プラグインで同一のバージョン番号を保つ

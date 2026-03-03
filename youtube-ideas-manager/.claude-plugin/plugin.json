@@ -1,7 +1,7 @@
 {
   "name": "youtube-ideas-manager",
   "description": "いけともch向けYouTube企画案を週次で生成するプラグイン。Supabaseのトレンド動画データを分析し、企画案10本を自動生成。",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": {
     "name": "iketomo",
     "email": ""

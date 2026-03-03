@@ -61,6 +61,185 @@ tools: ["Write", "Read"]
 
 「今日やるべきこと」と「中期的な施策案」に分けて記述する。
 
+## データ構造とSQLの参考
+
+サブエージェント側では、必要に応じて以下のテーブル構造とSQL例を参考にして
+Supabase MCP経由でデータ取得〜分析を行ってよい。
+
+### テーブル構造（circle_*テーブル群）
+
+| テーブル名 | 内容 | 主なカラム |
+|-----------|------|-----------|
+| circle_community | コミュニティ基本情報 | id, name, members_count |
+| circle_space_groups | スペースグループ | id, name, slug |
+| circle_spaces | スペース（チャンネル） | id, name, space_type, post_count, members_count |
+| circle_members | メンバー情報 | id, name, email, headline, last_seen_at, circle_created_at |
+| circle_posts | 投稿 | id, name, user_name, space_id, likes_count, comments_count, url, circle_created_at |
+| circle_comments | コメント | id, user_name, post_id, body_plain, likes_count, circle_created_at, raw_json |
+| circle_course_sections | コースセクション | id, space_id, name |
+| circle_course_lessons | コースレッスン | id, course_section_id, name |
+| circle_daily_snapshots | 日次サマリー統計 | snapshot_date, total_members, active_members, new_members_today, new_posts_today, new_comments_today |
+| circle_fetch_logs | データ取得ログ | fetch_type, status, started_at |
+| circle_member_activity_history | メンバー変動履歴 | member_id, snapshot_date, event_type, old_value, new_value |
+| circle_post_engagement_history | 投稿エンゲージメント日次推移 | post_id, snapshot_date, likes_count, comments_count, delta_likes, delta_comments |
+
+**データ品質の注意点**
+
+- `circle_comments` の `body_plain` と `post_id` はnullの場合がある。代わりに `raw_json` から以下のように取得する:
+  - 本文HTML: `raw_json->'body'->>'body'`
+  - 投稿ID: `raw_json->'post'->>'id'`
+  - 投稿タイトル: `raw_json->'post'->>'name'`
+  - コメント者名: `raw_json->'user'->>'name'`
+  - スペース名: `raw_json->'space'->>'name'`
+  - コメントURL: `raw_json->>'url'`
+- `circle_members` の `status` と `role` はnullの場合がある
+
+### 基本統計の取得例
+
+```sql
+-- メンバー数・投稿数・コメント数の現在値
+SELECT
+  (SELECT count(*) FROM circle_members) as total_members,
+  (SELECT count(*) FROM circle_members WHERE last_seen_at >= NOW() - INTERVAL '24 hours') as active_24h,
+  (SELECT count(*) FROM circle_members WHERE last_seen_at >= NOW() - INTERVAL '7 days') as active_7d,
+  (SELECT count(*) FROM circle_posts) as total_posts,
+  (SELECT count(*) FROM circle_comments) as total_comments,
+  (SELECT sum(likes_count) FROM circle_posts) as total_likes,
+  (SELECT count(*) FROM circle_posts WHERE circle_created_at >= NOW() - INTERVAL '24 hours') as new_posts_24h,
+  (SELECT count(*) FROM circle_comments WHERE circle_created_at >= NOW() - INTERVAL '24 hours') as new_comments_24h;
+```
+
+前日のスナップショットがあれば比較:
+
+```sql
+SELECT * FROM circle_daily_snapshots
+WHERE snapshot_date >= CURRENT_DATE - 1
+ORDER BY snapshot_date DESC LIMIT 2;
+```
+
+### 未対応コメント一覧（最重要セクション）の取得例
+
+「いけとも」以外のユーザーのコメントのうち、同じ投稿で「いけとも」の返信がないものを抽出する。
+`raw_json`を使って正確なデータを取得する。
+
+```sql
+WITH comment_data AS (
+  SELECT
+    c.id,
+    c.raw_json->'user'->>'name' as commenter_name,
+    (c.raw_json->'post'->>'id')::bigint as post_id,
+    c.raw_json->'post'->>'name' as post_title,
+    c.raw_json->'space'->>'name' as space_name,
+    c.raw_json->'body'->>'body' as body_html,
+    c.raw_json->>'url' as comment_url,
+    c.circle_created_at
+  FROM circle_comments c
+  WHERE c.circle_created_at >= NOW() - INTERVAL '48 hours'
+),
+iketomo_replied_posts AS (
+  SELECT DISTINCT (raw_json->'post'->>'id')::bigint as post_id
+  FROM circle_comments
+  WHERE raw_json->'user'->>'name' = 'いけとも'
+    AND circle_created_at >= NOW() - INTERVAL '48 hours'
+)
+SELECT cd.*
+FROM comment_data cd
+LEFT JOIN iketomo_replied_posts ir ON cd.post_id = ir.post_id
+WHERE cd.commenter_name != 'いけとも'
+  AND ir.post_id IS NULL
+ORDER BY cd.circle_created_at DESC;
+```
+
+未対応がある場合は「🔴 未対応あり」、ない場合は「✅ 全件対応済み」と明示する。
+
+参考として、いけともの直近の返信一覧も添えること（返信の質を確認するため）。
+
+### 新規投稿一覧（過去24〜48時間）の取得例
+
+```sql
+SELECT
+  p.id,
+  p.name as title,
+  p.user_name,
+  s.name as space_name,
+  p.likes_count,
+  p.comments_count,
+  p.url,
+  p.circle_created_at
+FROM circle_posts p
+LEFT JOIN circle_spaces s ON p.space_id = s.id
+WHERE p.circle_created_at >= NOW() - INTERVAL '48 hours'
+ORDER BY p.circle_created_at DESC;
+```
+
+### エンゲージメント急上昇投稿の取得例
+
+```sql
+SELECT
+  e.post_id,
+  p.name as post_title,
+  p.user_name,
+  s.name as space_name,
+  e.likes_count,
+  e.comments_count,
+  e.delta_likes,
+  e.delta_comments,
+  p.url
+FROM circle_post_engagement_history e
+LEFT JOIN circle_posts p ON e.post_id = p.id
+LEFT JOIN circle_spaces s ON p.space_id = s.id
+WHERE e.snapshot_date >= CURRENT_DATE - 1
+  AND (e.delta_likes > 0 OR e.delta_comments > 0)
+ORDER BY (e.delta_likes + e.delta_comments) DESC
+LIMIT 10;
+```
+
+データ蓄積が1日分の場合は、現在のいいね数TOP投稿を代わりに表示してもよい。
+
+### メンバー動向の取得例
+
+#### 新規入会者
+
+```sql
+SELECT name, headline, email, last_seen_at, circle_created_at
+FROM circle_members
+WHERE circle_created_at >= NOW() - INTERVAL '48 hours'
+ORDER BY circle_created_at DESC;
+```
+
+#### 週間アクティブ投稿者
+
+```sql
+SELECT user_name, count(*) as post_count
+FROM circle_posts
+WHERE circle_created_at >= NOW() - INTERVAL '7 days'
+GROUP BY user_name
+ORDER BY post_count DESC
+LIMIT 10;
+```
+
+#### 長期未ログインメンバー（離脱予兆）
+
+```sql
+SELECT name, email, last_seen_at,
+  EXTRACT(DAY FROM NOW() - last_seen_at) as days_since_last_seen
+FROM circle_members
+WHERE last_seen_at < NOW() - INTERVAL '30 days'
+  AND last_seen_at IS NOT NULL
+ORDER BY last_seen_at ASC
+LIMIT 10;
+```
+
+#### アクティブ率推移（daily_snapshotsがあれば）
+
+```sql
+SELECT snapshot_date, total_members, active_members,
+  ROUND(active_members::numeric / NULLIF(total_members, 0) * 100, 1) as active_rate_pct
+FROM circle_daily_snapshots
+ORDER BY snapshot_date DESC
+LIMIT 7;
+```
+
 ## ファイル保存
 
 保存先: `config.local.md` の「レポート出力先」フォルダ（デフォルト: `cowork_circle/log/`）
