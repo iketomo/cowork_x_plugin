@@ -1,35 +1,36 @@
 ---
 name: x-post
-description: X（Twitter）に投稿するスキル。x-writingスキル等で作成した投稿文を、Supabase Edge Function経由でX APIに送信して実際に投稿する。「Xに投稿して」「ツイートして」「Xにポストして」「投稿を公開して」「ツイートを送信」「x-post」などのリクエストで発動。
-version: 1.0.0
+description: X（Twitter）に投稿するスキル。x-writingスキル等で作成した投稿文を、Supabase Edge Function経由でX APIに送信して実際に投稿する。画像URLを渡すと画像付き投稿も可能。「Xに投稿して」「ツイートして」「Xにポストして」「投稿を公開して」「ツイートを送信」「画像付きで投稿」「x-post」などのリクエストで発動。
+version: 1.1.0
 ---
 
 # X投稿スキル（x-post）
 
 ## 概要
-x-writingスキル等で作成した投稿文を、X（Twitter）APIを通じて実際に投稿するスキル。
+投稿文（+ 任意で画像URL）を、X（Twitter）APIを通じて実際に投稿するスキル。
 Supabase Edge Function `x-post-tweet` を、pg_net経由で呼び出してツイートを投稿する。
+画像URLを渡すと、X API v1.1 media upload を経由して画像付きツイートを投稿できる。
 
 ## トリガー
-以下のようなリクエストで発動する：
 - 「Xに投稿して」「ツイートして」「Xにポストして」
 - 「この文章をXに投稿」「投稿を公開して」
-- 「ツイートを送信」「Xに送って」
+- 「画像付きで投稿して」「生成した画像と一緒に投稿」
 - 「x-post」
 
 ## 前提条件
-- Supabase Edge Function `x-post-tweet` がデプロイ済み
-- X API OAuth 1.0aキー（X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET）がSupabase Secretsに設定済み
-- Supabaseプロジェクト: `config.local.md` の Supabase 設定を参照
-- pg_net拡張が有効化済み（v0.20.0）
+- Supabase Edge Function `x-post-tweet` がデプロイ済み（v11以降）
+- X API OAuth 1.0aキーがSupabase Secretsに設定済み:
+  `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET`
+- 画像付き投稿の場合: 画像が公開URLでアクセス可能であること（Supabase Storage public URLなど）
+- pg_net拡張が有効化済み
 
 ## 投稿フロー
 
-### ステップ1: 投稿文の準備
-ユーザーから投稿文を受け取る。以下のいずれかの方法：
+### ステップ1: 投稿文と画像URLの準備
+ユーザーから投稿文と（任意で）画像URLを受け取る：
 1. ユーザーが直接テキストを指定
 2. x-writingスキルで生成した投稿文を使用
-3. 会話の中で確定した投稿文を使用
+3. x-imageスキルで生成した `image_url` を画像として使用
 
 ### ステップ2: 投稿前の確認（必須）
 投稿前に**必ず**ユーザーに最終確認を行う：
@@ -42,6 +43,8 @@ Supabase Edge Function `x-post-tweet` を、pg_net経由で呼び出してツイ
 ---
 
 文字数: {文字数}文字
+画像: {image_urlがあれば "あり（{URL}）" / なければ "なし"}
+
 投稿してよろしいですか？
 ```
 
@@ -50,28 +53,33 @@ Supabase Edge Function `x-post-tweet` を、pg_net経由で呼び出してツイ
 ### ステップ3: 投稿実行（pg_net方式）
 ユーザーの承認後、Supabase MCPの `execute_sql` で pg_net を使ってEdge Functionを呼び出す。
 
-#### 呼び出し方法
-
-Supabase MCPの `execute_sql` ツールで以下のSQLを実行する：
+#### テキストのみ投稿
 
 ```sql
--- ※ {EDGE_FUNCTION_URL} と {ANON_KEY} は config.local.md から取得すること
 SELECT net.http_post(
   url := '{EDGE_FUNCTION_URL}/x-post-tweet',
-  headers := '{
-    "Content-Type": "application/json",
-    "Authorization": "Bearer {ANON_KEY}"
-  }'::jsonb,
-  body := '{"text": "ここに投稿テキスト"}'::jsonb
-);
+  headers := '{"Content-Type": "application/json", "Authorization": "Bearer {ANON_KEY}"}'::jsonb,
+  body := '{"text": "投稿テキスト"}'::jsonb
+) AS request_id;
 ```
 
-- `project_id` は `config.local.md` の Supabase プロジェクトID を参照
-- 戻り値はリクエストID（整数）
+#### 画像付き投稿
+
+```sql
+SELECT net.http_post(
+  url := '{EDGE_FUNCTION_URL}/x-post-tweet',
+  headers := '{"Content-Type": "application/json", "Authorization": "Bearer {ANON_KEY}"}'::jsonb,
+  body := '{"text": "投稿テキスト", "image_url": "https://...supabase.co/storage/v1/object/public/x-images/..."}'::jsonb,
+  timeout_milliseconds := 30000
+) AS request_id;
+```
+
+- `EDGE_FUNCTION_URL` と `ANON_KEY` は `config.local.md` から取得
+- 画像付きの場合はメディアアップロードが入るため `timeout_milliseconds := 30000` を指定
 
 #### レスポンスの確認
 
-投稿リクエスト送信後、2〜3秒待ってからレスポンスを確認する：
+リクエスト送信後、5秒程度待ってから確認：
 
 ```sql
 SELECT id, status_code, content::text, timed_out
@@ -79,80 +87,64 @@ FROM net._http_response
 WHERE id = {リクエストID};
 ```
 
-- `status_code = 200` かつ contentに `"success": true` があれば投稿成功
-- contentにはtweet_id, url, text, char_countが含まれる
-
 ### ステップ4: 結果の報告
-投稿成功時（status_code=200, success=true）：
+
+成功時（status_code=200, success=true）：
 ```
 ✅ Xに投稿しました！
 🔗 {投稿URL}
+🖼 画像: あり / なし
 ```
 
-投稿失敗時：
+失敗時：
 ```
 ❌ 投稿に失敗しました
 エラー: {エラー内容}
 ```
 
-## 重要ルール
-
-### 文字数について
-- X Premium加入済みのため、長文投稿が可能（文字数上限なし）
-- 投稿前に文字数を表示するが、制限チェックは行わない
-
-### 改行・絵文字の扱い
-- 改行（`\n`）はそのままJSON文字列に含める
-- 絵文字はUnicodeそのまま送信（エスケープ不要）
-- Edge Functionが `Content-Type: application/json` でPOSTするため、日本語・絵文字は正しく処理される
-
-### 安全対策
-1. **投稿前の確認は省略しない** — 必ずユーザーの「はい」「OK」等の明示的承認を得る
-2. **同一テキストの重複投稿を避ける** — 直前に同じ内容を投稿していないか確認
-3. **エラー時のリトライは手動** — 自動リトライせず、ユーザーに状況を報告して判断を仰ぐ
-
-## Edge Function仕様
+## Edge Function仕様（x-post-tweet v11）
 
 ### エンドポイント
-`POST {EDGE_FUNCTION_URL}/x-post-tweet`（※ config.local.md 参照）
+`POST {EDGE_FUNCTION_URL}/x-post-tweet`
 
 ### リクエスト
 ```json
 {
-  "text": "投稿テキスト"
+  "text": "投稿テキスト",
+  "image_url": "https://...supabase.co/storage/v1/object/public/x-images/...png"
 }
 ```
+- `text`: 必須
+- `image_url`: 任意。公開アクセス可能なURL。Supabase Storage public URLが推奨。
+
+### 内部フロー（image_url指定時）
+1. `image_url` の画像をダウンロード
+2. X API v1.1 `POST https://upload.twitter.com/1.1/media/upload.json` に multipart/form-data でアップロード
+3. 取得した `media_id_string` を `media: { media_ids: [id] }` として X API v2 に渡して投稿
 
 ### レスポンス（成功）
 ```json
 {
   "success": true,
   "tweet_id": "1234567890",
-  "url": "https://x.com/{X_USERNAME}/status/1234567890",
+  "url": "https://x.com/iketomo2/status/1234567890",
   "text": "投稿テキスト",
-  "char_count": 7
+  "char_count": 10,
+  "has_image": true,
+  "media_ids": ["9876543210"]
 }
 ```
 
-### レスポンス（エラー）
-```json
-{
-  "error": "エラーメッセージ",
-  "status": 403,
-  "detail": { ... }
-}
-```
+## 重要ルール
 
-### 認証
-- `Authorization: Bearer {SUPABASE_ANON_KEY}` ヘッダーが必要
-- Edge Function内部でOAuth 1.0aを使ってX APIに認証
+1. **投稿前の確認は省略しない** — 必ずユーザーの明示的承認を得る
+2. **重複投稿を避ける** — 直前に同じ内容を投稿していないか確認
+3. **エラー時のリトライは手動** — 自動リトライせず、状況を報告して判断を仰ぐ
+4. **image_urlのアクセス可能性を確認** — Supabase Storage のpublicバケットのURLを推奨
 
-## x-writingスキルとの連携例
+## 連携ワークフロー例
 
-典型的なワークフロー：
-1. ユーザー: 「AIエージェントについてX投稿を書いて、そのまま投稿して」
-2. Claude: x-writingスキルで投稿文を生成
-3. Claude: 生成した投稿文をユーザーに提示し確認
-4. ユーザー: 「OK、投稿して」
-5. Claude: x-postスキルで `execute_sql` + pg_net でEdge Functionを呼び出し投稿
-6. Claude: レスポンス確認後、投稿結果（URL）を報告
+**画像付き投稿の典型フロー：**
+1. x-writingスキルで投稿文を生成
+2. x-imageスキルで投稿文に対応した画像を生成 → `image_url` を取得
+3. x-postスキルで `text` + `image_url` を渡して投稿確認 → 投稿実行
