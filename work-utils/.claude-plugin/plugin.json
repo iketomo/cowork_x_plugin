@@ -1,0 +1,9 @@
+{
+  "name": "work-utils",
+  "description": "アンケート管理・リサーチ保存・長期メモリなど、特定ツールに依存しない汎用業務ユーティリティを提供するプラグイン。",
+  "version": "1.0.0",
+  "author": {
+    "name": "iketomo",
+    "email": ""
+  }
+}

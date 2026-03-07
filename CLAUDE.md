@@ -40,6 +40,12 @@ cowork_plugin/                              # マーケットプレイス
 │   ├── commands/                          # 1コマンド
 │   ├── config.example.md
 │   └── config.local.md
+├── work-utils/                            # プラグイン⑤ 汎用業務ユーティリティ
+│   ├── .claude-plugin/plugin.json
+│   ├── skills/                            # 4スキル
+│   ├── agents/                            # 2サブエージェント
+│   ├── commands/                          # 4コマンド
+│   └── config.example.md
 ├── CLAUDE.md
 ├── SETUP.md
 ├── PROGRESS.md
@@ -167,9 +173,46 @@ cowork_plugin/                              # マーケットプレイス
 - DB: `weekly_trending_summary`, `weekly_trending_compact`, `news`, `ideas`
 - レポート出先: `cowork_youtube_ideas_optimize/log/`
 
+---
+
+### 5. work-utils（汎用業務ユーティリティ）
+
+#### スキル
+
+| スキル | トリガー例 | 処理概要 |
+|--------|-----------|---------|
+| enquete-read | 「アンケート結果を見せて」「過去のアンケートを検索」 | Supabaseからアンケートサマリを読み込み・検索・一覧表示 |
+| enquete-save | 「アンケート結果を保存」「調査データを登録」 | アンケート生データを分析し構造化サマリとしてDB保存 |
+| memory-manager | 「Supabaseに保存して」「長期メモリに登録」「過去の議論を探して」 | Supabase長期メモリへの保存・検索・活用 |
+| save-research | 「リサーチを保存」「調査結果を保存」 | 会話中のリサーチ・調査結果をDB保存 |
+
+#### サブエージェント
+
+| エージェント | モデル | 呼び出し元 | 役割 |
+|-------------|--------|-----------|------|
+| enquete-save-analyzer | sonnet | enquete-save | アンケート生データの分析・構造化・ユーザー確認・INSERT実行 |
+| research-save-analyzer | sonnet | save-research | 会話内容の分析・構造化・INSERT実行 |
+
+#### コマンド
+
+| コマンド | 説明 | 引数 |
+|---------|------|------|
+| `/enquete-read` | アンケートサマリの一覧・検索・取得 | アンケート名やキーワード（任意） |
+| `/enquete-save` | アンケートデータを分析して構造化保存 | データソースの説明（任意） |
+| `/memory` | Supabase長期メモリの保存・検索 | 保存内容や検索キーワード（任意） |
+| `/save-research` | リサーチ結果を構造化して保存 | 保存対象の補足（任意） |
+
+#### データベース
+- Supabase: `cowork`（config.local.md参照）
+- DB: `enquete_summary`, `research_items`, `memories` テーブル
+
+---
+
 ## バージョン運用ルール
 
-- `CLAUDE.md` をアップデートした場合は、以下のバージョンを同一の値に揃えて更新する
-  - `.claude-plugin/marketplace.json` の各 `plugins[].version`
-  - 各プラグイン直下の `.claude-plugin/plugin.json` の `version`
-- バージョンは `1.0.1` のように段階的にアップデートし、常に全プラグインで同一のバージョン番号を保つ
+- バージョンは **アップデートしたプラグインのみ** 個別にバンプする（全プラグイン同期は不要）
+- 更新時は以下の2箇所を一致させる：
+  - `.claude-plugin/marketplace.json` の該当 `plugins[].version`
+  - 該当プラグイン直下の `.claude-plugin/plugin.json` の `version`
+- バージョンは `1.0.0` → `1.0.1` のように段階的にアップデートする
+- アップデート内容は `UPDATE.md` に日付・プラグイン名・バージョン・変更内容を記録する

@@ -9,7 +9,7 @@
       "name": "x-manager",
       "source": "./x-manager",
       "description": "X (Twitter) 投稿の作成・投稿・パフォーマンス分析・トレンド分析を一括管理するプラグイン。X運用を支援する4つのスキルと4つのサブエージェントを提供。",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "author": {
         "name": "iketomo"
       },
@@ -49,6 +49,16 @@
       "name": "cowork-manager",
       "source": "./cowork-manager",
       "description": "Coworkプラグインの作成・カスタマイズ・管理を支援するプラグイン。3つのスキル（作成・カスタマイズ・一覧）がそれぞれ専用のサブエージェントに委譲する軽量アーキテクチャ。",
+      "version": "1.0.0",
+      "author": {
+        "name": "iketomo"
+      },
+      "category": "productivity"
+    },
+    {
+      "name": "work-utils",
+      "source": "./work-utils",
+      "description": "アンケート管理・リサーチ保存・長期メモリなど、特定ツールに依存しない汎用業務ユーティリティを提供するプラグイン。4つのスキルと2つのサブエージェントを提供。",
       "version": "1.0.0",
       "author": {
         "name": "iketomo"
