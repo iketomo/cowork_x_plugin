@@ -29,7 +29,12 @@ AI・生成AI領域のバズ投稿を分析し、自身のX投稿戦略に活か
 
 ### Step 1: サブエージェント — データ取得+整形
 
-Taskツール（subagent_type: `general-purpose`, model: `sonnet`）で `x-trend-data-collector` エージェントの指示に従いデータ取得。
+**subagent_type: `general-purpose`** で起動する（プラグイン定義エージェントはSupabase MCPにアクセスできないため、必ずgeneral-purposeを使うこと）。
+
+プロンプトには以下を渡す：
+1. エージェント定義ファイルを読んで指示に従うよう伝える（パス: `x-manager/agents/x-trend-data-collector.md`）
+2. `config.local.md` のパスを伝える（プロジェクトID取得用）
+3. 下記SQL-AとSQL-Bを渡し、execute_sqlで実行させる
 
 **SQL-A: 収集状況 + TOP投稿**
 
@@ -80,14 +85,33 @@ UNION ALL
 SELECT 'hour', to_json(h.*) as data FROM hours h;
 ```
 
-### Step 2: サブエージェント — 各Winner投稿のニュース背景調査
+### Step 2: サブエージェント — 各Winner投稿のニュース背景調査（並列5件）
 
-Step 1の結果からTOP5投稿を取り出し、**各投稿ごとに並列で** `x-trend-news-researcher` エージェントの指示に従いTaskツールを呼ぶ。
-1メッセージで最大5つのTask呼び出しを並列実行する。
+Step 1の結果からTOP5投稿を取り出し、**1メッセージの中で5つのAgentツール呼び出しを同時に**実行する。
+subagent_type は `x-manager:x-trend-news-researcher` を使う（WebSearchのみで軽量なのでプラグイン定義で問題ない）。
+
+**⚠️ 必ず以下のように1メッセージで並列起動すること。順番に1件ずつ呼ぶのは禁止。**
+
+```
+# 1メッセージ内でこの5つを同時に呼び出す
+Agent(x-manager:x-trend-news-researcher, prompt="投稿1: @xxx「...」スコアXXX")
+Agent(x-manager:x-trend-news-researcher, prompt="投稿2: @xxx「...」スコアXXX")
+Agent(x-manager:x-trend-news-researcher, prompt="投稿3: @xxx「...」スコアXXX")
+Agent(x-manager:x-trend-news-researcher, prompt="投稿4: @xxx「...」スコアXXX")
+Agent(x-manager:x-trend-news-researcher, prompt="投稿5: @xxx「...」スコアXXX")
+```
 
 ### Step 3: サブエージェント — 分析+DB保存+ファイル出力
 
-Step 1のデータ + Step 2のニュース背景を合わせて、`x-trend-analyzer` エージェントの指示に従いTaskツールで分析・保存・レポート出力。
+**subagent_type: `general-purpose`** で起動する（DB保存にexecute_sqlが必要なため、必ずgeneral-purposeを使うこと）。
+
+プロンプトには以下を渡す：
+1. エージェント定義ファイルを読んで指示に従うよう伝える（パス: `x-manager/agents/x-trend-analyzer.md`）
+2. `config.local.md` のパスを伝える（プロジェクトID取得用）
+3. Step 1のデータ全量
+4. Step 2のニュース背景5件分
+
+サブエージェントは分析・DB保存（execute_sql）・Markdownファイル保存を**すべて自分で完結**させる。
 
 ### メインエージェントの最終処理
 Step 3のサブエージェントから返ってきたファイルパスを使い、ユーザーに共有する。

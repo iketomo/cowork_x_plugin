@@ -15,12 +15,15 @@ description: |
   </example>
 model: sonnet
 color: yellow
-tools: ["Write", "Read"]
 ---
 
 # Xトレンド総合分析エージェント
 
-以下のXトレンドデータとニュース背景を分析し、レポート生成→DB保存→ファイル保存まで完了してください。
+> **注意**: このエージェントは `general-purpose` サブエージェントとして起動される。
+> Supabase MCPのexecute_sqlを使ってDB保存まで自分で完結させること。
+
+まず `config.local.md` を読んでプロジェクトIDとアカウント情報を取得する。
+以下のXトレンドデータとニュース背景を分析し、レポート生成→DB保存（execute_sql）→ファイル保存まで完了してください。
 
 ## 分析タスク
 1. TOP投稿の分類

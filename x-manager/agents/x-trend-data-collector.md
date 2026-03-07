@@ -15,12 +15,14 @@ description: |
   </example>
 model: sonnet
 color: cyan
-tools: ["Read", "Grep"]
 ---
 
 # Xトレンドデータ収集エージェント
 
-Supabaseプロジェクト（`config.local.md` のプロジェクトIDを参照）に対して execute_sql でSQLを実行し、結果を整形して返す。
+> **注意**: このエージェントは `general-purpose` サブエージェントとして起動される。
+> Supabase MCPのexecute_sqlを使ってSQLを実行できる。
+
+まず `config.local.md` を読んでプロジェクトIDを取得し、SQL-AとSQL-B（SKILL.mdで渡される）をexecute_sqlで実行して結果を整形して返す。
 
 ## 返却フォーマット（厳守・これ以外の情報は返さない）
 
