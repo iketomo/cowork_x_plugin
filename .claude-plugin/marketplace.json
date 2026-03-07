@@ -9,7 +9,7 @@
       "name": "x-manager",
       "source": "./x-manager",
       "description": "X (Twitter) 投稿の作成・投稿・パフォーマンス分析・トレンド分析を一括管理するプラグイン。X運用を支援する4つのスキルと4つのサブエージェントを提供。",
-      "version": "1.0.3",
+      "version": "1.0.4",
       "author": {
         "name": "iketomo"
       },
