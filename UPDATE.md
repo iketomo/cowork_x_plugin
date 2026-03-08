@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-03-08
+
+### work-utils `1.0.1`
+
+スキル分割・リネーム・新規追加による構成改善。
+
+- `memory-manager` を `memory-save`（保存専用）と `memory-read`（検索専用）に分割
+- `save-research` を `research-save` にリネーム（save/read の命名規則統一）
+- `research-read` を新規追加（research_items テーブルの検索・一覧表示）
+- コマンドも対応して更新: `/memory` → `/memory-save` + `/memory-read`, `/save-research` → `/research-save`, `/research-read` 新規追加
+- サブエージェント `research-save-analyzer` の参照先をリネームに合わせて更新
+- スキル数: 4 → 6、コマンド数: 4 → 6
+
+---
+
 ## 2026-03-07
 
 ### x-manager `1.0.4`

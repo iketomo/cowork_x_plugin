@@ -42,9 +42,9 @@ cowork_plugin/                              # マーケットプレイス
 │   └── config.local.md
 ├── work-utils/                            # プラグイン⑤ 汎用業務ユーティリティ
 │   ├── .claude-plugin/plugin.json
-│   ├── skills/                            # 4スキル
+│   ├── skills/                            # 6スキル
 │   ├── agents/                            # 2サブエージェント
-│   ├── commands/                          # 4コマンド
+│   ├── commands/                          # 6コマンド
 │   └── config.example.md
 ├── CLAUDE.md
 ├── SETUP.md
@@ -183,15 +183,17 @@ cowork_plugin/                              # マーケットプレイス
 |--------|-----------|---------|
 | enquete-read | 「アンケート結果を見せて」「過去のアンケートを検索」 | Supabaseからアンケートサマリを読み込み・検索・一覧表示 |
 | enquete-save | 「アンケート結果を保存」「調査データを登録」 | アンケート生データを分析し構造化サマリとしてDB保存 |
-| memory-manager | 「Supabaseに保存して」「長期メモリに登録」「過去の議論を探して」 | Supabase長期メモリへの保存・検索・活用 |
-| save-research | 「リサーチを保存」「調査結果を保存」 | 会話中のリサーチ・調査結果をDB保存 |
+| memory-save | 「Supabaseに保存して」「長期メモリに登録」「ナレッジを保存して」 | Supabase長期メモリへの保存 |
+| memory-read | 「過去の議論を探して」「長期メモリから探して」「記録を検索」 | Supabase長期メモリの検索・参照 |
+| research-save | 「リサーチを保存」「調査結果を保存」 | 会話中のリサーチ・調査結果をDB保存 |
+| research-read | 「リサーチを見せて」「過去の調査を検索」「リサーチ一覧」 | 保存済みリサーチの読み込み・検索・一覧表示 |
 
 #### サブエージェント
 
 | エージェント | モデル | 呼び出し元 | 役割 |
 |-------------|--------|-----------|------|
 | enquete-save-analyzer | sonnet | enquete-save | アンケート生データの分析・構造化・ユーザー確認・INSERT実行 |
-| research-save-analyzer | sonnet | save-research | 会話内容の分析・構造化・INSERT実行 |
+| research-save-analyzer | sonnet | research-save | 会話内容の分析・構造化・INSERT実行 |
 
 #### コマンド
 
@@ -199,8 +201,10 @@ cowork_plugin/                              # マーケットプレイス
 |---------|------|------|
 | `/enquete-read` | アンケートサマリの一覧・検索・取得 | アンケート名やキーワード（任意） |
 | `/enquete-save` | アンケートデータを分析して構造化保存 | データソースの説明（任意） |
-| `/memory` | Supabase長期メモリの保存・検索 | 保存内容や検索キーワード（任意） |
-| `/save-research` | リサーチ結果を構造化して保存 | 保存対象の補足（任意） |
+| `/memory-save` | Supabase長期メモリへの保存 | 保存内容（任意） |
+| `/memory-read` | Supabase長期メモリの検索・参照 | 検索キーワード（任意） |
+| `/research-save` | リサーチ結果を構造化して保存 | 保存対象の補足（任意） |
+| `/research-read` | 保存済みリサーチの一覧・検索・取得 | 検索キーワード（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）

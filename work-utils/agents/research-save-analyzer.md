@@ -2,10 +2,10 @@
 name: research-save-analyzer
 description: |
   会話中のリサーチ・調査内容を受け取り、構造化・Supabase保存を実行するサブエージェント。
-  save-researchスキルから呼び出される。
+  research-saveスキルから呼び出される。
 
   <example>
-  Context: save-researchスキルがユーザーの保存リクエストを受け付けた後
+  Context: research-saveスキルがユーザーの保存リクエストを受け付けた後
   user: "リサーチを保存して"
   assistant: "会話内容を確認しました。research-save-analyzerサブエージェントに構造化・保存を委譲します。"
   <commentary>
@@ -89,4 +89,4 @@ RETURNING id, title;
 ## 注意事項
 - タグ付け（research_tags, research_item_tags）はスコープ外
 - captured_atはデフォルト（now()）で良い。時期指定がある場合のみ設定
-- enquete-save（アンケート保存）・memory-manager（長期メモリ）との棲み分けに注意
+- enquete-save（アンケート保存）・memory-save（長期メモリ）との棲み分けに注意

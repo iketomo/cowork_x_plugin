@@ -1,17 +1,18 @@
 ---
-name: save-research
+name: research-save
 description: >
   会話の中で得られたリサーチ・調査・議論の内容をSupabaseのresearch_itemsテーブルに
   構造化して保存するスキル。メインエージェントはリクエスト受け付けのみ行い、
   会話内容の分析・構造化・INSERT実行はresearch-save-analyzerサブエージェントに委譲する。
   「リサーチを保存」「調査結果を保存」「リサーチデータを保存して」「save research」
   「この調査を記録して」「研究メモを保存」「今の議論を保存」「調べた内容を保存」
-  「ナレッジを保存」「リサーチ保存」「調査をDBに保存」「この分析を保存して」
+  「リサーチ保存」「調査をDBに保存」「この分析を保存して」
   「調査内容を記録」「リサーチ内容を蓄積して」などのフレーズで発動する。
-  ※「Supabaseに保存」「長期メモリに保存」「ナレッジ保存」はmemory-managerスキルの領域。
+  ※「Supabaseに保存」「長期メモリに保存」はmemory-saveスキルの領域。
   ※「アンケート結果を保存」「フォーム回答を保存」はenquete-saveスキルの領域。
+  ※検索・参照は research-read スキルを使う。
   本スキルは「会話内での調査・議論・リサーチ内容の保存」に特化する。
-version: 1.0.0
+version: 1.0.1
 ---
 
 # リサーチ保存スキル
@@ -29,8 +30,8 @@ version: 1.0.0
 
 | スキル | 対象データ | 保存方式 |
 |--------|-----------|---------|
-| **save-research**（本スキル） | 会話・議論・調査の内容 | title/summary/facts/insightsに分解して保存。素早く保存（確認不要） |
-| **memory-manager** | 重要な設計決定・長期的な知見 | memoriesテーブル。カテゴリ・重要度付きで保存 |
+| **research-save**（本スキル） | 会話・議論・調査の内容 | title/summary/facts/insightsに分解して保存。素早く保存（確認不要） |
+| **memory-save** | 重要な設計決定・長期的な知見 | memoriesテーブル。カテゴリ・重要度付きで保存 |
 | **enquete-save** | アンケート・インタビューの生データ | enquete_summaryテーブル。1示唆=1レコード。必ずユーザー確認あり |
 
 ## コンテキスト節約アーキテクチャ
@@ -113,9 +114,9 @@ RETURNING id, title;
 ### 完了報告フォーマット（サブエージェントが出力）
 
 ```
-リサーチを2件保存しました:
-1. 「LLMのコンテキストウィンドウ比較」(id: abc-123...)
-2. 「RAGの精度向上テクニック」(id: def-456...)
+リサーチをN件保存しました:
+1. 「{title}」(id: xxx...)
+2. 「{title}」(id: xxx...)
 
 （重複スキップがあった場合）
 スキップ: 「既存タイトル」（同一内容が登録済み）
@@ -128,3 +129,4 @@ RETURNING id, title;
 - タグ付け（research_tags, research_item_tags）は本スキルのスコープ外。保存のみ行う
 - `captured_at`はデフォルト（now()）で良い。ユーザーが「昨日の調査」など時期を指定した場合のみ設定する
 - Supabase MCP の `execute_sql` ツールを使用する（project_id: `iltymrnkqchixvtpvewm`）
+- **検索は別スキル**: 検索・参照は `research-read` スキルを使う
