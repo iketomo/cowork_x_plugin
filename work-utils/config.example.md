@@ -11,3 +11,4 @@
 - アンケートサマリ: `enquete_summary`
 - リサーチ: `research_items`
 - 長期メモリ: `memories`
+- グロースログ: `growth_log_learnings`

@@ -187,6 +187,8 @@ cowork_plugin/                              # マーケットプレイス
 | memory-read | 「過去の議論を探して」「長期メモリから探して」「記録を検索」 | Supabase長期メモリの検索・参照 |
 | research-save | 「リサーチを保存」「調査結果を保存」 | 会話中のリサーチ・調査結果をDB保存 |
 | research-read | 「リサーチを見せて」「過去の調査を検索」「リサーチ一覧」 | 保存済みリサーチの読み込み・検索・一覧表示 |
+| growthlog-read | 「グロースログを見せて」「反省・学びの一覧」「学びを検索」 | グロースログの読み込み・検索・復習対象抽出 |
+| growthlog-save | 「グロースログを保存」「反省を記録して」「学びを保存」 | 反省・学び・成功体験をDB保存 |
 
 #### サブエージェント
 
@@ -194,6 +196,7 @@ cowork_plugin/                              # マーケットプレイス
 |-------------|--------|-----------|------|
 | enquete-save-analyzer | sonnet | enquete-save | アンケート生データの分析・構造化・ユーザー確認・INSERT実行 |
 | research-save-analyzer | sonnet | research-save | 会話内容の分析・構造化・INSERT実行 |
+| growthlog-save-analyzer | sonnet | growthlog-save | 反省・学びの分析・構造化・AIコメント生成・INSERT実行 |
 
 #### コマンド
 
@@ -205,10 +208,12 @@ cowork_plugin/                              # マーケットプレイス
 | `/memory-read` | Supabase長期メモリの検索・参照 | 検索キーワード（任意） |
 | `/research-save` | リサーチ結果を構造化して保存 | 保存対象の補足（任意） |
 | `/research-read` | 保存済みリサーチの一覧・検索・取得 | 検索キーワード（任意） |
+| `/growthlog-read` | グロースログの一覧・検索・復習対象抽出 | 検索キーワード（任意） |
+| `/growthlog-save` | 反省・学び・成功体験をグロースログとして保存 | 保存したい内容（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）
-- DB: `enquete_summary`, `research_items`, `memories` テーブル
+- DB: `enquete_summary`, `research_items`, `memories`, `growth_log_learnings` テーブル
 
 ---
 
