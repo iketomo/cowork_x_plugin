@@ -11,9 +11,9 @@ cowork_plugin/                              # マーケットプレイス
 │   └── marketplace.json                   # マーケットプレイスマニフェスト
 ├── x-manager/                             # プラグイン① X (Twitter) 管理
 │   ├── .claude-plugin/plugin.json
-│   ├── skills/                            # 4スキル
+│   ├── skills/                            # 7スキル
 │   ├── agents/                            # 5サブエージェント
-│   ├── commands/                          # 5コマンド
+│   ├── commands/                          # 7コマンド
 │   ├── scripts/
 │   ├── reference/
 │   ├── log/
@@ -42,7 +42,7 @@ cowork_plugin/                              # マーケットプレイス
 │   └── config.local.md
 ├── work-utils/                            # プラグイン⑤ 汎用業務ユーティリティ
 │   ├── .claude-plugin/plugin.json
-│   ├── skills/                            # 6スキル
+│   ├── skills/                            # 10スキル
 │   ├── agents/                            # 2サブエージェント
 │   ├── commands/                          # 6コマンド
 │   └── config.example.md
@@ -66,6 +66,9 @@ cowork_plugin/                              # マーケットプレイス
 | x-trend-report | 「Xトレンドレポート」「AI界隈のバズ」 | AI領域バズ投稿のトレンド分析・投稿戦略提案 |
 | x-post | 「Xに投稿して」「ツイートして」 | Edge Function経由でXに投稿 |
 | x-writing | 「X投稿を書いて」「ツイート案」 | 投稿文作成 |
+| x-image | 「X投稿の画像を作って」「投稿用画像を生成」 | 投稿用1:1画像生成（Nano Banana 2） |
+| x-article-image | 「記事用の画像」「カード画像」「横長ヘッダー」 | 記事用5:2横長画像生成（Nano Banana 2） |
+| x-article-leadtext | 「X記事の紹介文」「記事のティザー」「元記事を踏まえて導入を」 | X記事の紹介ポスト本文（AIDA-X）生成 |
 
 #### サブエージェント
 
@@ -86,6 +89,8 @@ cowork_plugin/                              # マーケットプレイス
 | `/x-write` | X投稿の文章を作成 | テーマやニュースURL（任意） |
 | `/x-post` | Xに投稿を実行 | 投稿テキスト（任意） |
 | `/x-image` | 投稿用画像を生成 | 投稿テキスト or ファイルパス（任意） |
+| `/x-article-image` | 記事・カード用横長画像（5:2）を生成 | 記事タイトル or 画像用テキスト（任意） |
+| `/x-article-leadtext` | X記事の紹介ポスト本文を生成 | 記事URL or タイトル・要約（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）
@@ -190,6 +195,7 @@ cowork_plugin/                              # マーケットプレイス
 | growthlog-read | 「グロースログを見せて」「反省・学びの一覧」「学びを検索」 | グロースログの読み込み・検索・復習対象抽出 |
 | growthlog-save | 「グロースログを保存」「反省を記録して」「学びを保存」 | 反省・学び・成功体験をDB保存 |
 | story-writing | 「ビジネス記事を書いて」「読み物スタイルで」「東洋経済風の文章」 | 東洋経済オンライン・NewsPicks風のビジネス読み物スタイルで文章作成 |
+| fact-check-rewrite | 「ファクトチェックして」「事実確認して」「この記事を検証して」 | 記事のファクト抽出→並列検証→story-writing準拠の修正記事をGoogleドキュメント/Wordで出力 |
 
 #### サブエージェント
 

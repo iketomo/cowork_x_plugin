@@ -6,6 +6,22 @@
 
 ## 2026-03-12
 
+### work-utils `1.0.4`
+
+fact-check-rewrite スキルを新規追加。
+
+- `fact-check-rewrite` スキル新規追加: 記事・リサーチレポートのファクト抽出→並列サブエージェントによる検証→統合結果リスト→story-writing準拠の修正記事をGoogleドキュメントまたはWordで出力
+- スキル数: 9 → 10
+
+### x-manager `1.0.5`
+
+x-article-leadtext と x-article-image スキルを新規追加。
+
+- `x-article-leadtext` スキル新規追加: X記事の紹介ポスト本文（ティザー/リード文）をAIDA-Xフレームワークで生成。5パターン（問題解決型・成果数字型・好奇心ギャップ型・ストーリー型・リスト型）と実践ルールを定義
+- `x-article-image` スキル新規追加: 記事・カード用横長画像（5:2）をNano Banana 2で生成。Edge Function `x-generate-article-image` の reference を追加
+- `/x-article-leadtext`、`/x-article-image` コマンド新規追加
+- スキル数: 5 → 7、コマンド数: 5 → 7
+
 ### work-utils `1.0.3`
 
 story-writing スキルを新規追加。
