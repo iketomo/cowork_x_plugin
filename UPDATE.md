@@ -4,6 +4,29 @@
 
 ---
 
+## 2026-03-15
+
+### x-manager `1.0.6`
+
+レポートのチャット内閲覧対応。
+
+- `x-daily-report` スキル: レポート保存後にReadツールでファイルを読み込み、Claude Code上で折りたたみ式に閲覧可能に
+- `x-trend-report` スキル: 同上
+
+### circle-manager `1.0.3`
+
+レポートのチャット内閲覧対応。
+
+- `circle-daily-report` スキル: サブエージェント完了後にReadツールでレポートファイルを読み込み、Claude Code上で折りたたみ式に閲覧可能に
+
+### luma-manager `1.0.3`
+
+レポートのチャット内閲覧対応。
+
+- `luma-daily-report` スキル: Step 4「チャット内表示」を追加。Readツールでログファイルを読み込み、Claude Code上で折りたたみ式に閲覧可能に
+
+---
+
 ## 2026-03-14
 
 ### work-utils `1.0.5`

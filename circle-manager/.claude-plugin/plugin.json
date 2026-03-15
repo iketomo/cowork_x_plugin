@@ -1,7 +1,7 @@
 {
   "name": "circle-manager",
   "description": "Circleコミュニティ「アイザック」の日次レポート生成プラグイン。未対応コメント・新規投稿・メンバー動向・盛り上げアクション提案を含むレポートを生成。",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": {
     "name": "iketomo",
     "email": ""
