@@ -25,6 +25,12 @@
 
 - `luma-daily-report` スキル: Step 4「チャット内表示」を追加。Readツールでログファイルを読み込み、Claude Code上で折りたたみ式に閲覧可能に
 
+### youtube-ideas-manager `1.0.3`
+
+レポートのチャット内閲覧対応。
+
+- `weekly-youtube-ideas` スキル: Step 4「チャット内表示」を追加。Readツールでログファイルを読み込み、Claude Code上で折りたたみ式に閲覧可能に
+
 ---
 
 ## 2026-03-14

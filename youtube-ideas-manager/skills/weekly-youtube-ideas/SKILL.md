@@ -182,6 +182,14 @@ SELECT title_main, direction FROM ideas ORDER BY created_at DESC LIMIT 20;
 
 
 
+### Step 4: チャット内表示
+
+Step 3で保存したファイルを **Readツールで読み込む**。これによりClaude Code上で折りたたみ式に表示され、ユーザーがクリックで内容を確認できる。
+
+- Readツールでログファイルを読み込む（例: `cowork_youtube_ideas_optimize/log/weekly_ideas_20260315.md`）
+- その後、1〜2行の簡潔なサマリ（「企画10本を生成しました。注目トピック: ...」程度）だけテキストで出力する
+- レポート全文をテキストとして出力するのは**禁止**（Readツール結果で閲覧可能なため）
+
 ## 注意事項
 
 - トレンド動画が少ない週（5本未満）は、サブエージェントに「期間を14日に拡大してweekly_trending_compactから直接取得」と指示する
