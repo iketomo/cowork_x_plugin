@@ -1,7 +1,7 @@
 {
   "name": "luma-manager",
-  "description": "Lumaイベントの登録データを分析し、実績サマリ・傾向分析・打ち手提案を含む日次レポートを生成してSlack DMで報告するプラグイン。",
-  "version": "1.0.3",
+  "description": "Lumaイベントの管理プラグイン。日次レポート生成・イベント一覧取得・特定イベント詳細取得をサポート。",
+  "version": "1.0.4",
   "author": {
     "name": "iketomo",
     "email": ""
