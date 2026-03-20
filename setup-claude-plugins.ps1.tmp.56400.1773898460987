@@ -1,0 +1,103 @@
+# =============================================================================
+# setup-claude-plugins.ps1
+#
+# Cowork プラグインを Windows 環境用に設定する PowerShell スクリプト
+#
+# 使い方（PowerShell から）:
+#   powershell -ExecutionPolicy Bypass -File "C:\Users\tomoh\Dropbox\Cursor\cowork\cowork_plugin\setup-claude-plugins.ps1"
+#
+# または PowerShell を管理者で開いて:
+#   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+#   & "C:\Users\...\setup-claude-plugins.ps1"
+#
+# 何をするか:
+#   - Dropbox の cowork_plugin を installPath として
+#     %USERPROFILE%\.claude\plugins\installed_plugins.json を生成する
+# =============================================================================
+
+$ErrorActionPreference = "Stop"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# パス設定
+# ─────────────────────────────────────────────────────────────────────────────
+$ScriptDir    = Split-Path -Parent $MyInvocation.MyCommand.Path  # このスクリプトの場所 = cowork_plugin
+$PluginsDir   = $ScriptDir
+$ClaudeDir    = "$env:USERPROFILE\.claude"
+$OutputPath   = "$ClaudeDir\plugins\installed_plugins.json"
+$Now          = (Get-Date -Format "yyyy-MM-ddTHH:mm:ss.000Z")
+
+Write-Host "🔍 環境: Windows (PowerShell)" -ForegroundColor Cyan
+Write-Host "📦 プラグインディレクトリ: $PluginsDir"
+Write-Host "🏠 Claude 設定ディレクトリ: $ClaudeDir"
+Write-Host ""
+
+# ─────────────────────────────────────────────────────────────────────────────
+# プラグインディレクトリの確認
+# ─────────────────────────────────────────────────────────────────────────────
+if (-not (Test-Path $PluginsDir)) {
+    Write-Host "❌ プラグインディレクトリが見つかりません: $PluginsDir" -ForegroundColor Red
+    exit 1
+}
+
+# ─────────────────────────────────────────────────────────────────────────────
+# installed_plugins.json を生成
+# ─────────────────────────────────────────────────────────────────────────────
+Write-Host "--- installed_plugins.json を生成 ---"
+
+$plugins = @{}
+
+# cowork_plugin/ 配下のサブディレクトリをスキャン
+Get-ChildItem -Path $PluginsDir -Directory | Sort-Object Name | ForEach-Object {
+    $name      = $_.Name
+    $pluginDir = $_.FullName
+    $metaPath  = Join-Path $pluginDir ".claude-plugin\plugin.json"
+
+    if (-not (Test-Path $metaPath)) { return }
+
+    $metaContent = [System.IO.File]::ReadAllText($metaPath, [System.Text.Encoding]::UTF8)
+    $meta    = $metaContent | ConvertFrom-Json
+    $version = if ($meta.version) { $meta.version } else { "1.0.0" }
+    $key     = "${name}@cowork-plugins-marketplace"
+
+    $plugins[$key] = @(
+        [ordered]@{
+            scope       = "user"
+            installPath = $pluginDir
+            version     = $version
+            installedAt = $Now
+            lastUpdated = $Now
+        }
+    )
+
+    Write-Host "  OK $name (v$version)"
+    Write-Host "    -> $pluginDir"
+}
+
+$result = [ordered]@{
+    version = 2
+    plugins = $plugins
+}
+
+# 出力ディレクトリを作成
+$outDir = Split-Path -Parent $OutputPath
+if (-not (Test-Path $outDir)) {
+    New-Item -ItemType Directory -Path $outDir -Force | Out-Null
+}
+
+# JSON として書き出し (UTF8 BOM なし)
+$json = $result | ConvertTo-Json -Depth 10
+[System.IO.File]::WriteAllText($OutputPath, $json, [System.Text.Encoding]::UTF8)
+
+Write-Host ""
+Write-Host "保存完了: $OutputPath"
+Write-Host ""
+Write-Host "==========================================" -ForegroundColor Green
+Write-Host "セットアップ完了！" -ForegroundColor Green
+Write-Host ""
+Write-Host "次のステップ:"
+Write-Host "  1. Claude Code を再起動"
+Write-Host "  2. スキルが認識されているか確認: /list-plugins"
+Write-Host ""
+Write-Host "プラグインを追加・更新したら再実行:"
+Write-Host "  powershell -ExecutionPolicy Bypass -File `"$ScriptDir\setup-claude-plugins.ps1`""
+Write-Host "==========================================" -ForegroundColor Green

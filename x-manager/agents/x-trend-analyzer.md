@@ -52,52 +52,46 @@ ON CONFLICT (date) DO UPDATE SET
 ```
 
 ## ファイル保存
-保存先: /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_x_plugin/x-manager/log/x-trend-report_YYYY-MM-DD.md
-（logフォルダがなければ作成）
 
-レポートフォーマット:
+### 保存ルール（厳守）
+- **保存先ディレクトリ**: `/mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_plugin/x-manager/log/`
+- **ファイル名**: `x-trend-report_YYYY-MM-DD.md`
+- logフォルダがなければ作成
+- **このパス以外に保存してはならない**
+
+### レポートフォーマット（コンパクト版）
 ```
-# Xトレンド分析レポート（YYYY-MM-DD）
+# Xトレンド分析（YYYY-MM-DD）
 
-## 収集サマリ
+## サマリ
 総収集: XX件 / 分析対象: XX件
 
-## Winner TOP 5
-### 1.「本文60字...」
-- @username ❤️ XXX 🔄 XX
-- バズ仮説: ...
-- 背景: ...
-- URL
+## Winner TOP 3
+| # | 投稿（60字） | @user | スコア | バズ仮説 |
+|---|-------------|-------|-------|---------|
+| 1 | ... | ... | XXX | ... |
+| 2 | ... | ... | XXX | ... |
+| 3 | ... | ... | XXX | ... |
 
-[2-5も同様]
+※各WinnerのURL・背景は表の下にリスト形式で記載
 
-## Watch（6-10位）
-[各1行]
-
-## カテゴリ別トレンド
+## カテゴリ別
 | カテゴリ | 件数 | 平均likes | 傾向 |
 |---------|------|-----------|------|
-[各行]
 
-## フォーマット傾向
-[2-3行]
-
-## 投稿方針
+## 投稿方針（3点）
 1. ...
 2. ...
 3. ...
 
-## 投稿アイデア
-### 案1: [タイトル]
-- フック: ...
-- 推奨時間帯: XX時台
-- 参考Winner: @xxx
-
-### 案2: [タイトル]
-[同様]
-
-### 案3: [タイトル]
-[同様]
+## 投稿アイデア（2案）
+【案1: タイトル】フック: ... / 推奨: XX時台 / 参考: @xxx
+【案2: タイトル】フック: ... / 推奨: XX時台 / 参考: @xxx
 ```
 
-全て完了したら「完了: DB保存済み・ファイル保存済み（パス: ...）」と返してください。
+## 最終出力（厳守）
+作業完了後、**必ず以下のフォーマットだけ**を返してください：
+```
+REPORT_PATH=/mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_plugin/x-manager/log/x-trend-report_YYYY-MM-DD.md
+完了
+```

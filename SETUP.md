@@ -1,4 +1,52 @@
-# X Manager Plugin セットアップガイド
+# Cowork Plugin セットアップガイド
+
+## 📦 クロス環境セットアップ（Windows / WSL / Mac）
+
+このディレクトリ (`cowork_plugin/`) が Cowork プラグインの **真実の源泉** です。
+Dropbox 経由で全マシンに同期されます。各環境で以下を一度実行してください。
+
+### Windows (Git Bash)
+```bash
+bash "C:/Users/{ユーザー名}/Dropbox/Cursor/cowork/cowork_plugin/setup-claude-plugins.sh"
+```
+
+### WSL
+```bash
+bash /mnt/c/Users/{ユーザー名}/Dropbox/Cursor/cowork/cowork_plugin/setup-claude-plugins.sh
+```
+WSL の `~/.claude` がシンボリックリンクの場合、自動で独立化されます。
+（CLAUDE.md / rules / skills / commands / agents は Windows と共有維持）
+
+### macOS
+```bash
+bash ~/Dropbox/Cursor/cowork/cowork_plugin/setup-claude-plugins.sh
+```
+
+実行後、Claude Code を再起動すると全スキルが有効になります。
+
+**プラグインを追加・更新したら毎回スクリプトを再実行してください。**
+
+---
+
+## 仕組み
+
+```
+Dropbox/cowork_plugin/          ← このディレクトリ（全マシン共有）
+  x-manager/
+    .claude-plugin/plugin.json  ← バージョン情報
+    skills/ commands/ agents/   ← プラグイン本体
+  ...
+  setup-claude-plugins.sh       ← 環境別セットアップスクリプト
+
+~/.claude/plugins/installed_plugins.json  ← 各環境で独立生成
+  Windows:  installPath = C:\Users\...\Dropbox\...\x-manager
+  WSL:      installPath = /mnt/c/Users/.../Dropbox/.../x-manager
+  macOS:    installPath = ~/Dropbox/.../x-manager
+```
+
+---
+
+## X Manager Plugin セットアップガイド
 
 このプラグインを自分の環境で使うための設定手順です。
 
