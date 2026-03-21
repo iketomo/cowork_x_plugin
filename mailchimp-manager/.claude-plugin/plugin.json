@@ -1,0 +1,8 @@
+{
+  "name": "mailchimp-manager",
+  "version": "0.1.0",
+  "description": "Mailchimp メールマガジン管理プラグイン。Supabase Edge Function 経由でキャンペーンの作成・コピー更新・一覧確認を行う。",
+  "author": {
+    "name": "tomoh"
+  }
+}

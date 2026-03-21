@@ -147,7 +147,26 @@ bash /mnt/c/Users/{ユーザー名}/Dropbox/Cursor/cowork/cowork_plugin/setup-cl
 
 ## 定期メンテ（プラグイン追加・更新のたびに）
 
-`cowork_plugin/` 内のファイルを変更したら → **使う環境のスクリプトを再実行** → Claude Code 再起動。
+### 正しい更新フロー
+
+```
+1. ClaudeCowork（デスクトップアプリ）でプラグインを更新
+   └ cowork_plugin/ のファイルが更新される（Dropboxに反映）
+   └ ⚠️ installed_plugins.json がキャッシュパスに書き戻される
+
+2. Windows PowerShell でスクリプト実行
+   └ installed_plugins.json を Dropboxパスに上書き修正
+
+3. WSL でスクリプト実行
+   └ WSL側の installed_plugins.json を /mnt/c/ パスに上書き修正
+
+4. 各環境の Claude Code を再起動
+```
+
+> **なぜ 2・3 が必要か:**
+> ClaudeCowork の更新処理が `installed_plugins.json` を
+> `~/.claude/plugins/cache/...` のキャッシュパスに書き戻してしまう。
+> スクリプト実行で Dropbox パスに修正し直す。
 
 ```powershell
 # Windows（PowerShell）
@@ -158,6 +177,3 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\tomoh\Dropbox\Cursor\cowork\c
 # WSL
 bash /mnt/c/Users/tomoh/Dropbox/Cursor/cowork/cowork_plugin/setup-claude-plugins.sh
 ```
-
-> **なぜ必要か:** プラグイン更新時に `installed_plugins.json` が古いキャッシュパスに
-> 書き戻される場合がある。スクリプト再実行で Dropbox パスに修正される。
