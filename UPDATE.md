@@ -4,6 +4,25 @@
 
 ---
 
+## 2026-03-26
+
+### x-manager `1.0.8`
+
+x-post スキルに下書きモード（Chrome MCP）を追加。
+
+- `x-post` スキル: 投稿モード（Edge Function経由）に加え、下書きモード（Chrome MCP経由でX.comの下書きに保存）を追加。モード判定・Chrome MCP接続確認・テキスト入力・下書き保存の手順を定義
+- SKILL.md を v2.0.0 に更新
+
+### work-utils `1.0.7`
+
+ai-buzz-title-generator スキルを新規追加。
+
+- `ai-buzz-title-generator` スキル新規追加: AIノウハウ系コンテンツ（X・YouTube・ブログ等）のバズるタイトル・冒頭文・サムネイル案を生成。心理学的フック（好奇心ギャップ・損失回避・権威性）、プラットフォーム別最適化、パワーワードリスト、NGパターンを定義
+- `/ai-buzz-title-generator` コマンド新規追加
+- スキル数: 12 → 13、コマンド数: 10 → 11
+
+---
+
 ## 2026-03-17
 
 ### work-utils `1.0.6`

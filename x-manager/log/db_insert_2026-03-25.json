@@ -1,0 +1,20 @@
+{
+  "date": "2026-03-25",
+  "total_tracked": 27,
+  "winners": [
+    {"rank":1,"tweet_id":"2035642651488456874","text_short":"Microsoft、Copilot Coworkを発表―AIがMicrosoft 365内で実行・調整まで担う新機能！","score_3d":48,"d24h_likes":0,"url":"https://x.com/i/status/2035642651488456874"},
+    {"rank":2,"tweet_id":"2035854032825389061","text_short":"PhotoshopにAIアシスタント搭載、会話型AIで画像編集が可能に！","score_3d":23,"d24h_likes":0,"url":"https://x.com/i/status/2035854032825389061"},
+    {"rank":3,"tweet_id":"2035842023308276057","text_short":"claude × ゴールドマン・サックス解剖：RPAが10年で突破できなかった壁をAIが6カ月で崩した","score_3d":18,"d24h_likes":0,"url":"https://x.com/i/status/2035842023308276057"},
+    {"rank":4,"tweet_id":"2035914440395091988","text_short":"Google Meet「会議後チャット継続」機能、管理者がコントロールできるようになった！","score_3d":15,"d24h_likes":0,"url":"https://x.com/i/status/2035914440395091988"},
+    {"rank":5,"tweet_id":"2035552052869517701","text_short":"Amazon、PerplexityのAIショッピングボット利用を一時差し止め","score_3d":9,"d24h_likes":0,"url":"https://x.com/i/status/2035552052869517701"}
+  ],
+  "watch_list": [
+    {"tweet_id":"2035600251646796200","score_3d":9,"url":"https://x.com/i/status/2035600251646796200"},
+    {"tweet_id":"2034773034134118428","text_short":"Claude Codeに出会って、仕事が変わった人たちがいる","score_3d":6,"url":"https://x.com/i/status/2034773034134118428"},
+    {"tweet_id":"2035491649858494952","text_short":"OpenAIがChatGPTに新機能「動的ビジュアル解説」","score_3d":3,"url":"https://x.com/i/status/2035491649858494952"},
+    {"tweet_id":"2035608311006110069","text_short":"AIエージェント、うちにはまだ早い？Nvidia GTC 2026の数字","score_3d":3,"url":"https://x.com/i/status/2035608311006110069"}
+  ],
+  "summary": "全体横ばい傾向。Microsoft Copilot Cowork発表投稿がscore_3d=48でトップ。Photoshop AI・Goldman Sachs×Claude事例など具体的活用・ビジネス事例系が上位を占めた。フォロワーは直近7日で+75増（1日平均+12.5）と安定成長。3/22の+20増はMicrosoft Copilot Cowork投稿のバズが牽引と推察。",
+  "suggestions": "1. 具体的企業事例+AI活用インパクト数値の組み合わせ投稿を継続\n2. MicrosoftやAdobeなど主要ツールのAI新機能速報を優先取り上げ\n3. OpenAI superapp統合など大手再編ニュースを考察型で深掘り",
+  "run_log": {"generated_at": "2026-03-25T00:00:00Z", "method": "subagent", "db_status": "skipped_rls_policy", "note": "Anon key RLS policy blocked direct insert. Saved as JSON log."}
+}

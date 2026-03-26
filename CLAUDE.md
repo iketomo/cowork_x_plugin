@@ -42,9 +42,9 @@ cowork_plugin/                              # マーケットプレイス
 │   └── config.local.md
 ├── work-utils/                            # プラグイン⑤ 汎用業務ユーティリティ
 │   ├── .claude-plugin/plugin.json
-│   ├── skills/                            # 10スキル
-│   ├── agents/                            # 2サブエージェント
-│   ├── commands/                          # 6コマンド
+│   ├── skills/                            # 13スキル
+│   ├── agents/                            # 3サブエージェント
+│   ├── commands/                          # 11コマンド
 │   └── config.example.md
 ├── CLAUDE.md
 ├── SETUP.md
@@ -64,7 +64,7 @@ cowork_plugin/                              # マーケットプレイス
 |--------|-----------|---------|
 | x-daily-report | 「X日次レポート」「パフォーマンス分析」 | 自分の投稿のWinner/Watch分類・伸び分析・投稿提案 |
 | x-trend-report | 「Xトレンドレポート」「AI界隈のバズ」 | AI領域バズ投稿のトレンド分析・投稿戦略提案 |
-| x-post | 「Xに投稿して」「ツイートして」 | Edge Function経由でXに投稿 |
+| x-post | 「Xに投稿して」「ツイートして」「下書きにして」 | 投稿モード（Edge Function経由）または下書きモード（Chrome MCP経由）でXに投稿/保存 |
 | x-writing | 「X投稿を書いて」「ツイート案」 | 投稿文作成 |
 | x-image | 「X投稿の画像を作って」「投稿用画像を生成」 | 投稿用1:1画像生成（Nano Banana 2） |
 | x-article-image | 「記事用の画像」「カード画像」「横長ヘッダー」 | 記事用5:2横長画像生成（Nano Banana 2） |
@@ -198,6 +198,7 @@ cowork_plugin/                              # マーケットプレイス
 | fact-check-rewrite | 「ファクトチェックして」「事実確認して」「この記事を検証して」 | 記事のファクト抽出→並列検証→story-writing準拠の修正記事をGoogleドキュメント/Wordで出力 |
 | line-message | 「LINEメッセージを作って」「LINE配信文を書いて」「関心引き出しメッセージ」 | 行動経済学・心理学に基づくLINE公式アカウントの関心引き出しメッセージを3パターン作成 |
 | multi-stage-research | 「調査して」「リサーチして」「レポート作って」 | テーマを受け取り多段階（設計→並列調査→統合→批判チェック→レポート化）でリサーチを実行 |
+| ai-buzz-title-generator | 「バズるタイトルを考えて」「YouTube用のタイトル案」「サムネ案」 | AIノウハウ系コンテンツのバズるタイトル・冒頭文・サムネイル案を心理学的フック活用で生成 |
 
 #### サブエージェント
 
@@ -221,6 +222,7 @@ cowork_plugin/                              # マーケットプレイス
 | `/growthlog-save` | 反省・学び・成功体験をグロースログとして保存 | 保存したい内容（任意） |
 | `/line-message` | LINE関心引き出しメッセージを3パターン作成 | 配信目的・ターゲット・訴求内容（任意） |
 | `/research` | 多段階リサーチを実行してレポート作成 | 調査テーマ（任意） |
+| `/ai-buzz-title-generator` | AIノウハウ系バズタイトル・サムネイル案を生成 | テーマ・プラットフォーム・ターゲット（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）
