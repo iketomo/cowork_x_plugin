@@ -42,9 +42,9 @@ cowork_plugin/                              # マーケットプレイス
 │   └── config.local.md
 ├── work-utils/                            # プラグイン⑤ 汎用業務ユーティリティ
 │   ├── .claude-plugin/plugin.json
-│   ├── skills/                            # 13スキル
+│   ├── skills/                            # 16スキル
 │   ├── agents/                            # 3サブエージェント
-│   ├── commands/                          # 11コマンド
+│   ├── commands/                          # 14コマンド
 │   └── config.example.md
 ├── CLAUDE.md
 ├── SETUP.md
@@ -205,6 +205,7 @@ cowork_plugin/                              # マーケットプレイス
 | ai-buzz-title-generator | 「バズるタイトルを考えて」「YouTube用のタイトル案」「サムネ案」 | AIノウハウ系コンテンツのバズるタイトル・冒頭文・サムネイル案を心理学的フック活用で生成 |
 | browser-use | 「ブラウザで○○して」「Webで○○を調べて」「ブラウザ自動化」 | Browser Use 2.0でChrome CDP接続によるブラウザ自動操作（スクレイピング・情報収集・フォーム操作等） |
 | zoom-create-webinar | 「Zoomウェビナーを作って」「ウェビナーを作成」 | Supabase Edge Function経由でZoomウェビナーを作成（単独利用・luma-create-eventからの内部呼び出し両対応） |
+| slide-excel | 「YouTube企画をExcelにまとめて」「動画構成を表にして」「3列Excelを作って」 | YouTube動画企画を議論・構成検討し、3列構成（タイトル/内容/備考）のExcelをopenpyxlで生成 |
 
 #### サブエージェント
 
@@ -231,6 +232,7 @@ cowork_plugin/                              # マーケットプレイス
 | `/ai-buzz-title-generator` | AIノウハウ系バズタイトル・サムネイル案を生成 | テーマ・プラットフォーム・ターゲット（任意） |
 | `/browser-use` | Browser Use 2.0でブラウザ操作タスクを実行 | タスク内容（任意） |
 | `/zoom-create-webinar` | Zoomウェビナーを作成 | ウェビナー名・日時など（任意） |
+| `/slide-excel` | YouTube企画を3列構成のExcelにまとめる | テーマや企画内容（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）

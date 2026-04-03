@@ -6,6 +6,14 @@
 
 ## 2026-04-03
 
+### work-utils `1.0.10`
+
+slide-excel スキルを新規追加。
+
+- `slide-excel` スキル新規追加: いけともch向けYouTube動画企画を議論・構成検討し、3列構成（タイトル/内容/備考）のExcelファイルとして出力。openpyxlでデザイン規約に沿ったExcelを生成
+- `/slide-excel` コマンド新規追加
+- スキル数: 14 → 15、コマンド数: 13 → 14
+
 ### luma-manager `1.0.6`
 
 luma-mail-update スキルを新規追加。
