@@ -28,8 +28,8 @@
     {
       "name": "luma-manager",
       "source": "./luma-manager",
-      "description": "Lumaイベントの登録データ分析・日次レポート生成・イベント＋Zoomウェビナー一括作成をサポートするプラグイン。",
-      "version": "1.0.5",
+      "description": "Lumaイベントの登録データ分析・日次レポート生成・イベント＋Zoomウェビナー一括作成・メール設定一括更新をサポートするプラグイン。",
+      "version": "1.0.6",
       "author": {
         "name": "iketomo"
       },

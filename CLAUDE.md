@@ -133,6 +133,7 @@ cowork_plugin/                              # マーケットプレイス
 |--------|-----------|---------|
 | luma-daily-report | 「Luma日次レポート」「イベント登録状況」 | イベント登録データの分析・サマリ・傾向分析・打ち手提案をSlack DMで報告 |
 | luma-create-event | 「イベントを作りたい」「Lumaイベントを新規作成」「ウェビナー付きイベント作成」 | Lumaイベント＋Zoomウェビナーの一括作成（Zoom失敗時フォールバック対応） |
+| luma-mail-update | 「メール更新」「イベント紹介を更新」「luma-mail-update」 | Lumaイベント登録確認メールのイベント紹介リストをChrome MCP経由で一括更新 |
 
 #### サブエージェント
 
@@ -146,6 +147,7 @@ cowork_plugin/                              # マーケットプレイス
 |---------|------|------|
 | `/luma-daily` | Luma日次レポートを生成してSlackに送信 | なし |
 | `/luma-create-event` | Lumaイベント＋Zoomウェビナーを一括作成 | イベント名・日時など（任意） |
+| `/luma-mail-update` | Lumaイベント登録確認メールのイベント紹介リストを一括更新 | 更新するイベント紹介リスト（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）

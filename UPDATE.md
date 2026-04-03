@@ -6,6 +6,14 @@
 
 ## 2026-04-03
 
+### luma-manager `1.0.6`
+
+luma-mail-update スキルを新規追加。
+
+- `luma-mail-update` スキル新規追加: Lumaイベント登録確認メールのイベント紹介リストをChrome MCP経由で一括更新。既存メール設定の差替・新規作成に対応
+- `/luma-mail-update` コマンド新規追加
+- スキル数: 4 → 5、コマンド数: 2 → 3
+
 ### luma-manager `1.0.5`
 
 luma-create-event スキルを新規追加。
