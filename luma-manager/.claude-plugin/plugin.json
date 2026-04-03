@@ -1,7 +1,7 @@
 {
   "name": "luma-manager",
-  "description": "Lumaイベントの管理プラグイン。日次レポート生成・イベント一覧取得・特定イベント詳細取得をサポート。",
-  "version": "1.0.4",
+  "description": "Lumaイベントの管理プラグイン。日次レポート生成・イベント一覧取得・特定イベント詳細取得・イベント＋Zoomウェビナー一括作成をサポート。",
+  "version": "1.0.5",
   "author": {
     "name": "iketomo",
     "email": ""

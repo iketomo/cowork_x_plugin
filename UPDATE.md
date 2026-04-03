@@ -4,6 +4,37 @@
 
 ---
 
+## 2026-04-03
+
+### luma-manager `1.0.5`
+
+luma-create-event スキルを新規追加。
+
+- `luma-create-event` スキル新規追加: Lumaイベント＋Zoomウェビナーの一括作成。ヒアリング→確認→Zoom作成→Luma作成→結果報告のフロー。Zoom失敗時のフォールバック（Lumaのみ作成）にも対応
+- `/luma-create-event` コマンド新規追加
+- スキル数: 3 → 4、コマンド数: 1 → 2
+
+### work-utils `1.0.9`
+
+zoom-create-webinar スキルを新規追加。
+
+- `zoom-create-webinar` スキル新規追加: Supabase Edge Function経由でZoomウェビナーを作成する汎用スキル。単独利用もluma-create-eventからの内部呼び出しも可能
+- `/zoom-create-webinar` コマンド新規追加
+- スキル数: 13 → 14、コマンド数: 11 → 12
+
+---
+
+## 2026-03-27
+
+### work-utils `1.0.8`
+
+browser-use スキルを新規追加。
+
+- `browser-use` スキル新規追加: Browser Use 2.0 (bu-2-0) を使ったブラウザ自動操作。Chrome CDP接続によるログイン済みセッション再利用、Webスクレイピング・情報収集・フォーム操作等に対応
+- コマンド `/browser-use` を追加
+
+---
+
 ## 2026-03-26
 
 ### x-manager `1.0.8`

@@ -132,6 +132,7 @@ cowork_plugin/                              # マーケットプレイス
 | スキル | トリガー例 | 処理概要 |
 |--------|-----------|---------|
 | luma-daily-report | 「Luma日次レポート」「イベント登録状況」 | イベント登録データの分析・サマリ・傾向分析・打ち手提案をSlack DMで報告 |
+| luma-create-event | 「イベントを作りたい」「Lumaイベントを新規作成」「ウェビナー付きイベント作成」 | Lumaイベント＋Zoomウェビナーの一括作成（Zoom失敗時フォールバック対応） |
 
 #### サブエージェント
 
@@ -144,6 +145,7 @@ cowork_plugin/                              # マーケットプレイス
 | コマンド | 説明 | 引数 |
 |---------|------|------|
 | `/luma-daily` | Luma日次レポートを生成してSlackに送信 | なし |
+| `/luma-create-event` | Lumaイベント＋Zoomウェビナーを一括作成 | イベント名・日時など（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）
@@ -199,6 +201,8 @@ cowork_plugin/                              # マーケットプレイス
 | line-message | 「LINEメッセージを作って」「LINE配信文を書いて」「関心引き出しメッセージ」 | 行動経済学・心理学に基づくLINE公式アカウントの関心引き出しメッセージを3パターン作成 |
 | multi-stage-research | 「調査して」「リサーチして」「レポート作って」 | テーマを受け取り多段階（設計→並列調査→統合→批判チェック→レポート化）でリサーチを実行 |
 | ai-buzz-title-generator | 「バズるタイトルを考えて」「YouTube用のタイトル案」「サムネ案」 | AIノウハウ系コンテンツのバズるタイトル・冒頭文・サムネイル案を心理学的フック活用で生成 |
+| browser-use | 「ブラウザで○○して」「Webで○○を調べて」「ブラウザ自動化」 | Browser Use 2.0でChrome CDP接続によるブラウザ自動操作（スクレイピング・情報収集・フォーム操作等） |
+| zoom-create-webinar | 「Zoomウェビナーを作って」「ウェビナーを作成」 | Supabase Edge Function経由でZoomウェビナーを作成（単独利用・luma-create-eventからの内部呼び出し両対応） |
 
 #### サブエージェント
 
@@ -223,6 +227,8 @@ cowork_plugin/                              # マーケットプレイス
 | `/line-message` | LINE関心引き出しメッセージを3パターン作成 | 配信目的・ターゲット・訴求内容（任意） |
 | `/research` | 多段階リサーチを実行してレポート作成 | 調査テーマ（任意） |
 | `/ai-buzz-title-generator` | AIノウハウ系バズタイトル・サムネイル案を生成 | テーマ・プラットフォーム・ターゲット（任意） |
+| `/browser-use` | Browser Use 2.0でブラウザ操作タスクを実行 | タスク内容（任意） |
+| `/zoom-create-webinar` | Zoomウェビナーを作成 | ウェビナー名・日時など（任意） |
 
 #### データベース
 - Supabase: `cowork`（config.local.md参照）

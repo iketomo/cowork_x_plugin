@@ -1,0 +1,20 @@
+{
+  "date": "2026-03-27",
+  "total_tracked": 24,
+  "winners": [
+    {"rank":1,"tweet_id":"2036970536698601694","text_short":"Agent Skillsが業界標準になりつつある。AnthropicがSKILL.mdをオープンフォーマットとして公","score_3d":60,"d24h_likes":0,"d24h_reposts":0,"url":"https://x.com/i/status/2036970536698601694","hypothesis":"Agent Skills/SKILL.mdという具体的技術トピックが専門層に刺さりいいね51獲得"},
+    {"rank":2,"tweet_id":"2036743279640035593","text_short":"(画像/リンク投稿)","score_3d":38,"d24h_likes":0,"d24h_reposts":0,"url":"https://x.com/i/status/2036743279640035593","hypothesis":"画像やリンクのビジュアル訴求でエンゲージメント獲得（quotes=3が高い）"},
+    {"rank":3,"tweet_id":"2037092203109986546","text_short":"Perplexityは、Macで実行できるAIエージェントPersonal Computer","score_3d":20,"d24h_likes":0,"d24h_reposts":0,"url":"https://x.com/i/status/2037092203109986546","hypothesis":"AIエージェントの具体的製品速報が関心を集めた"},
+    {"rank":4,"tweet_id":"2036604874885042538","text_short":"(画像/リンク投稿)","score_3d":15,"d24h_likes":0,"d24h_reposts":0,"url":"https://x.com/i/status/2036604874885042538","hypothesis":"ビジュアル系コンテンツによる流入"},
+    {"rank":5,"tweet_id":"2037001603807392169","text_short":"CanvaのAI生成デザインにレイヤー機能Magic Layersを追加","score_3d":13,"d24h_likes":0,"d24h_reposts":0,"url":"https://x.com/i/status/2037001603807392169","hypothesis":"CanvaというBtoB/クリエイター層に馴染みのあるツールのAI新機能速報"}
+  ],
+  "watch_list": [
+    {"tweet_id":"2036747272319611085","text_short":"【GTC 2026 完全解説】NVIDIAが発表したヤバいこと、まとめました","score_3d":8,"url":"https://x.com/i/status/2036747272319611085"},
+    {"tweet_id":"2036642451113558055","text_short":"NVIDIAの進化が止まらない。Blackwell Ultra、Rubin、Feynman","score_3d":8,"url":"https://x.com/i/status/2036642451113558055"},
+    {"tweet_id":"2036970626796417124","text_short":"4月9日Agent Skillsワークショップ告知","score_3d":3,"url":"https://x.com/i/status/2036970626796417124"},
+    {"tweet_id":"2034766868859560164","text_short":"Luma AI Uni-1発表","score_3d":1,"url":"https://x.com/i/status/2034766868859560164"}
+  ],
+  "summary": "全体横ばい〜微上昇傾向。Agent Skills/SKILL.md関連投稿がscore_3d=60（いいね51）でダントツトップ。AIエージェント・具体的開発ツール系コンテンツが上位を占めた。フォロワーは直近7日で+74増（1日平均+10.6）と安定成長基調。3/22の+20増はNVIDIA GTC 2026発表投稿の拡散が牽引と推察。",
+  "suggestions": "1. AIエージェント・Agent Skills系の具体的技術解説を増やす（専門層への訴求が高い）\n2. 速報＋ビジュアル（絵文字・Before/After形式）の組み合わせを継続\n3. Perplexity・Canvaなど実用ツールのAI新機能速報を朝時間帯（7〜9時）に投稿",
+  "run_log": {"generated_at": "2026-03-27T00:00:00Z", "method": "subagent", "db_status": "skipped_rls_policy", "note": "Anon key RLS policy blocked direct insert. Saved as JSON log."}
+}
