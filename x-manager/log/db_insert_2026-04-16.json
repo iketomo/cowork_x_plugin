@@ -1,0 +1,94 @@
+{
+  "date": "2026-04-16",
+  "total_tracked": 24,
+  "winners": [
+    {
+      "rank": 1,
+      "tweet_id": "2044249355331207621",
+      "text": "NII国産LLM LLM-jp-4オープンソース公開",
+      "score_3d": 850,
+      "d24h_likes": 0,
+      "url": "https://x.com/i/status/2044249355331207621",
+      "hypothesis": "国産LLMのOSS公開という希少性が高拡散"
+    },
+    {
+      "rank": 2,
+      "tweet_id": "2044250190035702027",
+      "text": "中国AI一人企業 半年300万社創業 超級個体",
+      "score_3d": 236,
+      "d24h_likes": 0,
+      "url": "https://x.com/i/status/2044250190035702027",
+      "hypothesis": "1人で数億円という数字と中国AI格差が好奇心刺激"
+    },
+    {
+      "rank": 3,
+      "tweet_id": "2043886967935655987",
+      "text": "Google Gemma4 オープンAIモデル発表",
+      "score_3d": 82,
+      "d24h_likes": 0,
+      "url": "https://x.com/i/status/2043886967935655987",
+      "hypothesis": "Google速報はデフォルト注目度高い"
+    },
+    {
+      "rank": 4,
+      "tweet_id": "2042796493845991511",
+      "text": "URL投稿 継続伸び中",
+      "score_3d": 68,
+      "d24h_likes": 13,
+      "url": "https://x.com/i/status/2042796493845991511",
+      "hypothesis": "継続的にいいねが積み上がる長期型"
+    },
+    {
+      "rank": 5,
+      "tweet_id": "2042814195113300125",
+      "text": "AIエージェントに鍵を渡さないセキュリティ設計",
+      "score_3d": 65,
+      "d24h_likes": 6,
+      "url": "https://x.com/i/status/2042814195113300125",
+      "hypothesis": "累計いいね580 セキュリティxAI専門性訴求"
+    }
+  ],
+  "watch_list": [
+    {
+      "tweet_id": "2044234830045716718",
+      "score_3d": 68,
+      "url": "https://x.com/i/status/2044234830045716718"
+    },
+    {
+      "tweet_id": "2043475828156358687",
+      "score_3d": 46,
+      "url": "https://x.com/i/status/2043475828156358687"
+    },
+    {
+      "tweet_id": "2044188954745032800",
+      "text": "月額Claudeサブスク50倍請求リスク",
+      "score_3d": 46,
+      "url": "https://x.com/i/status/2044188954745032800"
+    },
+    {
+      "tweet_id": "2043252796019867787",
+      "text": "Microsoft Copilot超知能統合",
+      "score_3d": 38,
+      "url": "https://x.com/i/status/2043252796019867787"
+    },
+    {
+      "tweet_id": "2043855260930978196",
+      "text": "Googleエージェントアプリ時代",
+      "score_3d": 35,
+      "url": "https://x.com/i/status/2043855260930978196"
+    },
+    {
+      "tweet_id": "2043826573330309374",
+      "text": "OpenAI Codex従量課金",
+      "score_3d": 32,
+      "url": "https://x.com/i/status/2043826573330309374"
+    }
+  ],
+  "summary": "フォロワー34,199（前日比+69）。7日合計+145、1日平均+20.7。NII国産LLM投稿がscore_3d 850で圧倒的1位。速報×国産テーマが最も拡散。4/12(+44)と4/15(+69)の急増はGemma4/NII投稿との相関が高い。週末バズ不在による純減に注意。",
+  "suggestions": "1. 国産AI・オープンソースリリース速報を発表後2時間以内に投稿する。2. 「半年で300万社」「1人で数億円」など具体的数字を冒頭フックに使う。3. 週末も1件以上バズ投稿を確保しフォロワー純増を維持する。",
+  "run_log": {
+    "generated_at": "2026-04-16T09:00:00Z",
+    "method": "subagent",
+    "note": "MCP execute_sql未接続のためJSONフォールバック保存"
+  }
+}
